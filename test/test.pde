@@ -6,6 +6,9 @@ int SQUARE_SIZE;
 int[][] grid = new int[rows][cols];
 boolean[][] passed = new boolean[rows][cols];
 PImage grass;
+int speed = 1;
+int dX;
+int dY;
 
 void setup() {
   size(500, 420);
@@ -33,6 +36,7 @@ void setup() {
   {
     for (int c = 0; c < cols; c++)
     {
+      passed[r][c] = false;
       if ((grid[r][c] == 0) && (random(100) < 15))
       {
         grid[r][c] = 4;
@@ -42,18 +46,70 @@ void setup() {
         xPos = c;
         yPos = r;
       }
+      passed[yPos][xPos] = true;
     }
   }
+  dX = xPos * SQUARE_SIZE + (SQUARE_SIZE/2);
+  dY = yPos * SQUARE_SIZE + (SQUARE_SIZE/2);
 }
 
 
 void draw() {
   // First, test drawGrid()
   drawGrid();
-  fill(0);
-  circle(SQUARE_SIZE * xPos + (SQUARE_SIZE/2), SQUARE_SIZE * yPos + (SQUARE_SIZE/2), SQUARE_SIZE/2);
   
-  if (frameCount % 10 == 0)
+  int destX = xPos * SQUARE_SIZE + (SQUARE_SIZE/2);
+  int destY = yPos * SQUARE_SIZE + (SQUARE_SIZE/2);
+  
+  if (dX < destX)
+  {
+    if (dX + speed > destX)
+    {
+      dX = destX;
+    }
+    else
+    {
+      dX += speed;
+    }
+  }
+  else if (dX > destX)
+  {
+    if (dX - speed < destX)
+    {
+      dX = destX;
+    }
+    else
+    {
+      dX -= speed;
+    }
+  }
+  
+  if (dY < destY)
+  {
+    if (dY + speed > destY)
+    {
+      dY = destY;
+    }
+    else
+    {
+      dY += speed;
+    }
+  }
+  else if (dY > destY)
+  {
+    if (dY - speed < destY)
+    {
+      dY = destY;
+    }
+    else
+    {
+      dY -= speed;
+    }
+  }
+  
+  fill(0);
+  circle(dX, dY, SQUARE_SIZE/2);
+  if ((dX == destX) && (dY == destY))
   {
     move();
   }
@@ -100,7 +156,7 @@ void move() {
     int newY = yPos + dir[i][1];
     if (newX >= 0 && newX < cols && newY >= 0 && newY < rows)
     {
-      if ((passed[newY][newX] == false) && ((grid[newY][newX] == 1) || (grid[newY][newX] == 1)))
+      if ((passed[newY][newX] == false) && ((grid[newY][newX] == 1) || (grid[newY][newX] == -1)))
       {
         passed[newY][newX] = true;
         xPos = newX;
