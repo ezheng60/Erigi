@@ -6,16 +6,22 @@ int SQUARE_SIZE;
 int[][] grid = new int[rows][cols];
 boolean[][] passed = new boolean[rows][cols];
 PImage grass;
-int speed = 1;
+PImage goblin;
+PImage cave;
+PImage path;
+int speed = 2;
 int dX;
 int dY;
 
 void setup() {
-  size(500, 420);
+  size(1000, 900);
   SQUARE_SIZE  = min(height/rows, width/cols);
   // This is just a SAMPLE grid (2D array): columns map to X, rows map to Y
   // This grid must be of dimensions: int[width/SQUARE_SIZE][height/SQUARE_SIZE]
   grass = loadImage("grass.jpg");
+  goblin = loadImage("goblin.PNG");
+  cave = loadImage("cave.png");
+  path = loadImage("path.jpg");
   for (int row = 0; row < grid.length; row++)
   {
     for (int col = 0; col < grid[0].length; col++)
@@ -107,8 +113,7 @@ void draw() {
     }
   }
   
-  fill(0);
-  circle(dX, dY, SQUARE_SIZE/2);
+  image(goblin, dX - SQUARE_SIZE/2, dY - SQUARE_SIZE/2, SQUARE_SIZE, SQUARE_SIZE);
   if ((dX == destX) && (dY == destY))
   {
     move();
@@ -121,10 +126,6 @@ void drawGrid() {
     for (int c = 0; c < cols; c++)
     {
       noStroke();
-      if (grid[r][c] == -1)
-      {
-        fill(205, 204, 175);
-      }
       if (grid[r][c] == 0) //GRASS
       {
         fill(202, 229, 184);
@@ -143,6 +144,14 @@ void drawGrid() {
       if (grid[r][c] == 4)
       {
         image(grass, SQUARE_SIZE*c, SQUARE_SIZE*r, SQUARE_SIZE, SQUARE_SIZE);
+      }
+      if (grid[r][c] == -1)
+      {
+        image(cave, SQUARE_SIZE*c, SQUARE_SIZE*r, SQUARE_SIZE, SQUARE_SIZE);
+      }
+      if (grid[r][c] == 1)
+      {
+        image(path, SQUARE_SIZE*c, SQUARE_SIZE*r, SQUARE_SIZE, SQUARE_SIZE);
       }
     }
   }
