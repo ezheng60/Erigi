@@ -31,11 +31,13 @@ class Enemy{
       return; 
     }
     if (sPt.equals(mPt)){
+      println("HI");
       for (int i = 0; i < dir.length; i++){
         PVector temp = sPt.copy().add(PVector.mult(dir[i], Block.blockSize));
         temp.x = (int)(constrain(temp.x, 0, 1000)/Block.blockSize);
         temp.y = (int)(constrain(temp.y, 0, 800)/Block.blockSize);
         if (!(passed[(int)temp.y][(int)temp.x])){ // remmeber Pvectors x is the colums for array
+          passed[(int)sPt.y/Block.blockSize][(int)sPt.x/Block.blockSize] = true;
           mPt = temp;
           break;
         }
@@ -53,7 +55,7 @@ class Enemy{
         }
       }
     }
-    println(sPt);
+
     circle(sPt1.x+Block.blockSize/2, sPt1.y+Block.blockSize/2, 100);
   }
   
