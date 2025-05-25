@@ -1,17 +1,18 @@
-class Enemy{
+abstract class Enemy{
   private boolean[][] passed;
   private PVector sPt, mPt, ePt;
   private int speed = 5;
-  private PVector[] dir = {new PVector(0, 1),
-                   new PVector(0, -1),
-                   new PVector(1, 0),
-                   new PVector(-1, 0)};
+  private int index = 0;
+  private PVector[] dir = {new PVector(0, 1), //down
+                   new PVector(0, -1), //up
+                   new PVector(1, 0), //right
+                   new PVector(-1, 0)}; //left
 
   public Enemy(Map map){
-    Block[][] temp = map.grid();
-    sPt = map.sPt().copy();
-    mPt = map.sPt().copy();
-    ePt = map.ePt().copy();
+    Block[][] temp = map.grid(); // starting, middle, end point
+    sPt = map.sPtMap().copy();
+    mPt = map.sPtMap().copy();
+    ePt = map.ePtMap().copy();
     passed = new boolean[temp.length][temp[0].length];
     for (int a = 0; a < temp.length; a++){
       for (int b = 0; b < temp[0].length; b++){
@@ -25,38 +26,28 @@ class Enemy{
     }
   }
   
-  public void move(){
-    PVector sPt1 = sPt.copy(); // THIS IS IN HTE MIDDLE OF SPT AND MPT
-    if(sPt.equals(ePt)){
+  public void move(PImage pic){
+    if(sPt.equals(ePt)){ // once enemy reaces house stop
       return; 
     }
     if (sPt.equals(mPt)){
-      println("HI");
       for (int i = 0; i < dir.length; i++){
-        PVector temp = sPt.copy().add(PVector.mult(dir[i], Block.blockSize));
-        temp.x = (int)(constrain(temp.x, 0, 1000)/Block.blockSize);
-        temp.y = (int)(constrain(temp.y, 0, 800)/Block.blockSize);
-        if (!(passed[(int)temp.y][(int)temp.x])){ // remmeber Pvectors x is the colums for array
-          passed[(int)sPt.y/Block.blockSize][(int)sPt.x/Block.blockSize] = true;
-          mPt = temp;
+        PVector temp = sPt.copy().add(PVector.mult(dir[i], Block.blockSize)); // CHECK SURROUNDING TILES
+        temp.x = (int)(constrain(temp.x, 0, 900)); //CONSTRAINS SO THAT INDEX ISNTO UT OF BOUND
+        temp.y = (int)(constrain(temp.y, 0, 700)); // this is like height-100
+        if (!(passed[(int)temp.y/Block.blockSize][(int)temp.x/Block.blockSize])){ // remmeber Pvectors x is the colums for array
+          passed[(int)sPt.y/Block.blockSize][(int)sPt.x/Block.blockSize] = true; // sets startingpoint as unpassable
+          mPt = temp; // sets new destination
+          index = i; // saves direction of destination
           break;
         }
       }
     }
     ////
     else{
-      for (int i = 0; i < dir.length; i++){
-        PVector temp = sPt.copy().add(PVector.mult(dir[i], Block.blockSize));
-        temp.x = (int)(constrain(temp.x, 0, 1000)/Block.blockSize);
-        temp.y = (int)(constrain(temp.y, 0, 800)/Block.blockSize);
-        if (!(passed[(int)temp.y][(int)temp.x])){ // remmeber Pvectors x is the colums for array
-          sPt.add(PVector.mult(dir[i], speed));
-          break;
-        }
-      }
+      sPt.add(PVector.mult(dir[index], speed)); // go in the saved direction
     }
-
-    circle(sPt1.x+Block.blockSize/2, sPt1.y+Block.blockSize/2, 100);
+    image(pic, sPt.x, sPt.y);
   }
   
 }

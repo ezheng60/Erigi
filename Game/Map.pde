@@ -36,28 +36,27 @@ class Map{
  public Block[][] grid(){
    return grid; 
  }
- public PVector sPt(){
+ public PVector sPtMap(){
    return sPt; 
  }
- public PVector ePt(){
+ public PVector ePtMap(){
    return ePt; 
  }
  
- public void mapDraw(PImage grass, PImage dirt, PImage house, PImage cave){
-   for (Block[] one: grid){
+ public void mapDraw(PGraphics graphics, PImage grass, PImage dirt, PImage house, PImage cave){
+   for (Block[] one: grid){ // THIS FUNCTIONS PUTS ALL THE IMAGES DOWN
      for (Block part: one){
        if(!part.getPath()){ // if block isnt path make grass
-         image(grass, part.getx(), part.gety(), Block.blockSize, Block.blockSize);
+         graphics.image(grass, part.getx(), part.gety(), Block.blockSize, Block.blockSize);
        }
        else{ // else make dirt
-         image(dirt, part.getx(), part.gety(), Block.blockSize, Block.blockSize); 
+         graphics.image(dirt, part.getx(), part.gety(), Block.blockSize, Block.blockSize); 
        }
      }
    }
-   image(house, ePt.x, ePt.y, Block.blockSize, Block.blockSize); 
-   image(grass, sPt.x, sPt.y, Block.blockSize, Block.blockSize); 
-   image(cave, sPt.x, sPt.y, Block.blockSize, Block.blockSize); 
-
+   graphics.image(house, ePt.x, ePt.y, Block.blockSize, Block.blockSize); 
+   graphics.image(grass, sPt.x, sPt.y, Block.blockSize, Block.blockSize); 
+   graphics.image(cave, sPt.x, sPt.y, Block.blockSize, Block.blockSize);  
  }
  
 }
