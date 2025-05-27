@@ -1,5 +1,5 @@
 class Map{
-  Block[][] grid;
+  private Block[][] grid;
   private PVector sPt; // spawning point
   private PVector ePt; // house
 

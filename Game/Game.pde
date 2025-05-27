@@ -1,8 +1,9 @@
-int SQUARE_SIZE = 100;
-PImage grass, dirt, house, cave, goblin;
+PImage grass, dirt, house, cave, usagi, goblin, chiikawa;
 Map map1;
+Waves wave;
 PGraphics combineMap;
-Goblin test;
+ArrayList<Tower> listT = new ArrayList<Tower>();
+ArrayList<Enemy> listE = new ArrayList<Enemy>();
 
 void setup(){
    size(1000, 800); // 10 columns, 8 rows
@@ -14,23 +15,38 @@ void setup(){
    cave = loadImage("cave.png");
    goblin = loadImage("goblin.PNG");
    goblin.resize(100, 100);
+   usagi = loadImage("usagi.png");
+   usagi.resize(100, 100);
    map1 = new Map();
    combineMap = createGraphics(width, height); // this makes all the images into one
    combineMap.beginDraw(); // so that our game doesnt lage
    map1.mapDraw(combineMap, grass, dirt, house, cave);
    combineMap.endDraw();
-   test = new Goblin(map1, goblin);
-   
+   wave = new Waves(listE, map1, goblin);
 }
 
 void draw(){
   image(combineMap, 0, 0);
-  test.move();
   mouseCheck();
+  wave.update();
+  for (Tower part: listT){
+    if (part instanceof Usagi){
+      part.build(usagi);
+    }
+  }
+  for (Enemy enemy: listE){
+    if (enemy instanceof Goblin){
+      ((Goblin)enemy).move();
+    }
+  }
 }
 
 void mouseCheck(){
-  int x = constrain(mouseX, 0, 700);
-  int y = constrain(mouseY, 0, 900);
-  map1.grid[y/Block.blockSize][x/Block.blockSize].buildable();
+  int x = constrain(mouseX, 0, 900)/Block.blockSize;
+  int y = constrain(mouseY, 0, 700)/Block.blockSize;
+  if (map1.grid[y][x].buildable() && mousePressed){
+    Tower temp = new Usagi(listE, map1.grid[y][x], 10, 10, 10, 10, 10, usagi); //cost, damage, attackSpeed, range, level;
+    listT.add(temp);
+    println("HI");
+  }
 }

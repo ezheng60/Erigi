@@ -1,14 +1,21 @@
 abstract class Enemy{
   private boolean[][] passed;
-  private PVector sPt, mPt, ePt;
-  private int speed = 5;
+  private int HP, maxHP, damage, bounty, speed;
+  private boolean alive;
+  private PVector sPt, mPt, ePt; // sPt is basically like the position vector
   private int index = 0;
   private PVector[] dir = {new PVector(0, 1), //down
                    new PVector(0, -1), //up
                    new PVector(1, 0), //right
                    new PVector(-1, 0)}; //left
 
-  public Enemy(Map map){
+  public Enemy(Map map, int HP, int maxHP, int damage, int bounty, int speed, boolean alive){
+    this.HP = HP;
+    this.maxHP = maxHP;
+    this.damage = damage;
+    this.bounty = bounty;
+    this.speed = speed;
+    this.alive = alive;
     Block[][] temp = map.grid(); // starting, middle, end point
     sPt = map.sPtMap().copy();
     mPt = map.sPtMap().copy();
@@ -26,7 +33,7 @@ abstract class Enemy{
     }
   }
   
-  public void move(PImage pic){
+  public void move(PImage pic){ // OK SO THIS TAKES A SPRITE SO IN THE SUBCLASS YOU PUT THE SPRITE THERE AND DO SUPER.MOVE AND USE THE SPRITE AS AN INPUT
     if(sPt.equals(ePt)){ // once enemy reaces house stop
       return; 
     }
@@ -48,6 +55,10 @@ abstract class Enemy{
       sPt.add(PVector.mult(dir[index], speed)); // go in the saved direction
     }
     image(pic, sPt.x, sPt.y);
+  }
+  
+  public PVector sPtEnemy(){
+    return sPt; 
   }
   
 }
