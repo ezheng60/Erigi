@@ -1,5 +1,5 @@
 class Block{
-  private int x, y;
+  private int x, y; // should this be a pvector
   private boolean path;
   private boolean occupied;
   static final int blockSize = 100; // hardcode
@@ -30,4 +30,17 @@ class Block{
   public void setOccupied(boolean occupied){
     this.occupied = occupied;
   }
+  
+  public boolean buildable(){
+    if (occupied){
+      stroke(255, 0, 0);  
+    }
+    else{
+      stroke(0, 255, 0);   
+    }
+    noFill();
+    square(x, y, blockSize);
+    return !occupied;
+  }
+  
 }
