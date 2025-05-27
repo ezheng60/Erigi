@@ -28,7 +28,7 @@ void setup(){
 void draw(){
   image(combineMap, 0, 0);
   mouseCheck();
-  wave.update();
+  wave.update(); // WAVE SYSTEM
   for (Tower part: listT){
     if (part instanceof Usagi){
       part.build(usagi);
@@ -37,6 +37,13 @@ void draw(){
   for (Enemy enemy: listE){
     if (enemy instanceof Goblin){
       ((Goblin)enemy).move();
+    }
+  }
+  for (Tower part: listT){
+    for (Enemy enemy: listE){
+      if (part.inRange(enemy)){
+        println(part.inRange(enemy));
+      }
     }
   }
 }
