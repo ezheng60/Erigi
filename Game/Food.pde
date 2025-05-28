@@ -30,8 +30,4 @@ class Food{
    return false;
  }
  
- public void collide(Enemy enemy){
-   
- }
- 
 }
