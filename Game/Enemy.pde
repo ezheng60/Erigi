@@ -62,7 +62,22 @@ abstract class Enemy{
   }
   
   public void takeDamage(int damage) {
-    HP--;
+    if (alive)
+    {
+      HP -= damage;
+    }
   }
   
+  public void checkHealth()
+  {
+    if (HP <= 0)
+    {
+      alive = false;
+    }
+  }
+    
+    public boolean getAlive()
+    {
+      return alive;
+    }
 }

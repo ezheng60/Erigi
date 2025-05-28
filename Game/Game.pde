@@ -40,6 +40,10 @@ void draw(){
   for (Enemy enemy: listE){
     if (enemy instanceof Goblin){
       ((Goblin)enemy).move();
+      if (enemy.getAlive() != true)
+      {
+        listE.remove(enemy);
+      }
     }
   }
   for (Tower part: listT){

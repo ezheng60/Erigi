@@ -17,13 +17,13 @@ class Food{
  
  public void move(){
    position.add(v);
-   image(sprite, position.x, position.y, 2*radius, 2*radius);
+   image(sprite, position.x - radius, position.y - radius, 2*radius, 2*radius);
  }
  
  public boolean enemyHit(PVector sPt)
  {
    //check if distance between sPt and current food position is less than radius
-   if (sqrt((sPt.x - position.x)*(sPt.x - position.x) + (sPt.y - position.y)*(sPt.y - position.y)) <= radius)
+   if (sqrt((sPt.x + (Block.blockSize / 2) - position.x)*(sPt.x + (Block.blockSize / 2) - position.x) + (sPt.y + (Block.blockSize / 2) - position.y)*(sPt.y + (Block.blockSize / 2) - position.y)) <= radius)
    {
      return true;
    }
