@@ -1,4 +1,4 @@
-PImage grass, dirt, house, cave, usagi, goblin, chiikawa, food;
+PImage grass, dirt, house, cave, usagi, goblin, chiikawa, hachiware, food, poop;
 Map map1;
 Waves wave;
 PGraphics combineMap;
@@ -18,6 +18,8 @@ void setup(){
    usagi = loadImage("usagi.png");
    usagi.resize(100, 100);
    food = loadImage("food.png");
+   poop = loadImage("poop.PNG");
+   hachiware = loadImage("hachiware.png");
    map1 = new Map();
    combineMap = createGraphics(width, height); // this makes all the images into one
    combineMap.beginDraw(); // so that our game doesnt lage
@@ -36,13 +38,18 @@ void draw(){
       part.attack();
       part.foodCheck();
     }
+    if (part instanceof Hachiware){
+      part.build(hachiware);
+      part.attack();
+      part.poopCheck();
+    }
   }
-  for (Enemy enemy: listE){
-    if (enemy instanceof Goblin){
-      ((Goblin)enemy).move();
-      if (enemy.getAlive() != true)
+  for (int i = listE.size() - 1; i >= 0; i--){
+    if (listE.get(i) instanceof Goblin){
+      ((Goblin)listE.get(i)).move();
+      if (listE.get(i).getAlive() != true)
       {
-        listE.remove(enemy);
+        listE.remove(listE.get(i));
       }
     }
   }
@@ -59,8 +66,19 @@ void mouseCheck(){
   int x = constrain(mouseX, 0, 900)/Block.blockSize;
   int y = constrain(mouseY, 0, 700)/Block.blockSize;
   if (map1.grid[y][x].buildable() && mousePressed){
-    Tower temp = new Usagi(listE, map1.grid[y][x], 10, 10, 10, 100, 10, usagi, food, 40); //cost, damage, attackSpeed, range, level;
-    listT.add(temp);
+    if (keyPressed)
+    {
+      if (key == '1')
+      {
+        Tower temp = new Usagi(listE, map1.grid[y][x], 10, 10, 10, 100, 10, usagi, food, 40); //cost, damage, attackSpeed, range, level;
+        listT.add(temp);
+      }
+      if (key == '2')
+      {
+        Tower temp = new Hachiware(listE, map1.grid[y][x], 10, 10, 10, 100, 10, hachiware, poop, 40); //cost, damage, attackSpeed, range, level;
+        listT.add(temp);
+      }
+    }
     println("HI");
   }
 }

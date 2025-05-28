@@ -51,6 +51,7 @@ class Usagi extends Tower{
           listFood.remove(i);
           //add enemies taking dmg here
           listE.get(e).takeDamage(super.damage);
+          listE.get(e).checkHealth();
           break;
         }
         if ((listFood.get(i).position.x + 2 * listFood.get(i).radius > width) || (listFood.get(i).position.y + 2 * listFood.get(i).radius > height) || (listFood.get(i).position.x < 0) || (listFood.get(i).position.y < 0))

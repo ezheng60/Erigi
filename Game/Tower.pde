@@ -22,7 +22,7 @@ abstract class Tower{
   }
   
   public void build(PImage sprite){  // OK SO THIS TAKES A SPRITE SO IN THE SUBCLASS YOU PUT THE SPRITE THERE AND DO SUPER.MOVE AND USE THE SPRITE AS AN INPUT
-    image(sprite, cell.getx(), cell.gety());
+    image(sprite, cell.getx(), cell.gety(), Block.blockSize, Block.blockSize);
     cell.setOccupied(true);
   }
     
@@ -39,6 +39,10 @@ abstract class Tower{
   }
   
   public void foodCheck()
+  {
+  }
+  
+  public void poopCheck()
   {
   }
   
