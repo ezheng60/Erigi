@@ -1,4 +1,4 @@
-PImage grass, dirt, house, cave, usagi, goblin, chiikawa;
+PImage grass, dirt, house, cave, usagi, goblin, chiikawa, food;
 Map map1;
 Waves wave;
 PGraphics combineMap;
@@ -17,6 +17,7 @@ void setup(){
    goblin.resize(100, 100);
    usagi = loadImage("usagi.png");
    usagi.resize(100, 100);
+   food = loadImage("food.png");
    map1 = new Map();
    combineMap = createGraphics(width, height); // this makes all the images into one
    combineMap.beginDraw(); // so that our game doesnt lage
@@ -32,6 +33,8 @@ void draw(){
   for (Tower part: listT){
     if (part instanceof Usagi){
       part.build(usagi);
+      part.attack();
+      part.foodCheck();
     }
   }
   for (Enemy enemy: listE){
@@ -52,7 +55,7 @@ void mouseCheck(){
   int x = constrain(mouseX, 0, 900)/Block.blockSize;
   int y = constrain(mouseY, 0, 700)/Block.blockSize;
   if (map1.grid[y][x].buildable() && mousePressed){
-    Tower temp = new Usagi(listE, map1.grid[y][x], 10, 10, 10, 10, 10, usagi); //cost, damage, attackSpeed, range, level;
+    Tower temp = new Usagi(listE, map1.grid[y][x], 10, 10, 10, 100, 10, usagi, food, 40); //cost, damage, attackSpeed, range, level;
     listT.add(temp);
     println("HI");
   }
