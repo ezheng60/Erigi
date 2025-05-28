@@ -19,7 +19,6 @@ class Usagi extends Tower{
   }
   
   public void attack(){
-    print(cd);
     if (cd > 0)
     {
       cd--;
@@ -55,7 +54,7 @@ class Usagi extends Tower{
           //add enemies taking dmg here
           break;
         }
-        if ((listFood.get(i).position.x > width) || (listFood.get(i).position.y > height) || (listFood.get(i).position.x < 0) || (listFood.get(i).position.y < 0))
+        if ((listFood.get(i).position.x + 2 * listFood.get(i).radius > width) || (listFood.get(i).position.y + 2 * listFood.get(i).radius > height) || (listFood.get(i).position.x < 0) || (listFood.get(i).position.y < 0))
         {
           //if food goes outside screen, remove from foodlist
           listFood.remove(i);

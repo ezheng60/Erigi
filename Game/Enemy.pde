@@ -61,4 +61,8 @@ abstract class Enemy{
     return sPt; 
   }
   
+  public void takeDamage(int damage) {
+    HP--;
+  }
+  
 }
