@@ -25,4 +25,13 @@ abstract class Tower{
     return false;
   } // REMEMEBER THAT POSITIONS ARE THE TOP LEFT CORNER NOT THE CENTER
   
+  
+  public void attack()
+  {
+  }
+  
+  public void foodCheck()
+  {
+  }
+  
 }
