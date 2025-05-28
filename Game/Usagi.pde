@@ -2,6 +2,7 @@ class Usagi extends Tower{
   private PImage sprite;
   private ArrayList<Food> listFood;
   private PImage foodSprite;
+
   private int cd;
   private int totalCD;
   
@@ -29,15 +30,12 @@ class Usagi extends Tower{
       {
         if (this.inRange(super.listE.get(i)))
         {
-          listFood.add(new Food(foodSprite, 
-          new PVector(super.cell.getx()+ Block.blockSize / 2, super.cell.gety() + Block.blockSize / 2),
-          super.damage,
-          Block.blockSize / 4,
-          new PVector(listE.get(i).sPtEnemy().x + Block.blockSize / 2, listE.get(i).sPtEnemy().y + Block.blockSize / 2)));
+          listFood.add(new Food(foodSprite, new PVector(super.cell.getx() + Block.blockSize / 2, super.cell.gety() + Block.blockSize / 2), super.damage, Block.blockSize / 4, new PVector(listE.get(i).sPtEnemy().x + Block.blockSize / 2, listE.get(i).sPtEnemy().y + Block.blockSize / 2)));
           // center of tower as initial position and center of first enemy in list as enemyPos
           cd = totalCD;
           break;
         }
+        this.setcd(this.getcd()+1000);
       }
     }
   }

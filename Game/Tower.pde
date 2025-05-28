@@ -1,16 +1,24 @@
 abstract class Tower{
-  private int cost, damage, attackSpeed, range, level;
+  private int cost, damage, range, level, cd; //cd is like atkspeed
   private Block cell;
   private ArrayList<Enemy> listE;
   
-  public Tower(ArrayList<Enemy> listE, Block cell, int cost, int damage, int attackSpeed, int range, int level){
+  public Tower(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int cd){
     this.listE = listE;
     this.cell = cell;
     this.cost = cost;
     this.damage = damage;
-    this.attackSpeed = attackSpeed;
     this.range = range;
     this.level = level;
+    this.cd = cd;
+  }
+  
+  public int getcd(){
+    return cd;  
+  }
+  
+  public void setcd(int cd){
+    this.cd = cd;
   }
   
   public void build(PImage sprite){  // OK SO THIS TAKES A SPRITE SO IN THE SUBCLASS YOU PUT THE SPRITE THERE AND DO SUPER.MOVE AND USE THE SPRITE AS AN INPUT
