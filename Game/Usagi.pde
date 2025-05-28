@@ -2,14 +2,12 @@ class Usagi extends Tower{
   private PImage sprite;
   private ArrayList<Food> listFood;
   private PImage foodSprite;
-  private int cd;
   
-  public Usagi(ArrayList<Enemy> listE, Block cell, int cost, int damage, int attackSpeed, int range, int level, PImage sprite, PImage foodSprite){
-    super(listE, cell, cost, damage, attackSpeed, range, level);
+  public Usagi(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int cd, PImage sprite, PImage foodSprite){
+    super(listE, cell, cost, damage, range, level, cd);
     this.sprite = sprite;
     this.foodSprite = foodSprite;
     this.listFood = new ArrayList<Food>();
-    this.cd = 0;
   }
   
   public void build(){
@@ -17,25 +15,17 @@ class Usagi extends Tower{
   }
   
   public void attack(){
-    if (cd > 0)
-    {
-      cd--;
-    }
-    else
+    if (this.getcd() < millis())
     {
       for (int i = 0; i < super.listE.size(); i++)
       {
         if (this.inRange(super.listE.get(i)))
         {
-          listFood.add(new Food(foodSprite, 
-          new PVector(super.cell.getx()+ Block.blockSize / 2, super.cell.gety() + Block.blockSize / 2),
-          super.damage,
-          Block.blockSize / 4,
-          new PVector(listE.get(i).sPtEnemy().x + Block.blockSize / 2, listE.get(i).sPtEnemy().y + Block.blockSize / 2)));
+          listFood.add(new Food(foodSprite, new PVector(super.cell.getx()+ Block.blockSize / 2, super.cell.gety() + Block.blockSize / 2), super.damage, Block.blockSize / 4, new PVector(listE.get(i).sPtEnemy().x + Block.blockSize / 2, listE.get(i).sPtEnemy().y + Block.blockSize / 2)));
           // center of tower as initial position and center of first enemy in list as enemyPos
-          cd = super.attackSpeed;
           break;
         }
+        this.setcd(this.getcd()+1000);
       }
     }
   }

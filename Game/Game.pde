@@ -55,7 +55,7 @@ void mouseCheck(){
   int x = constrain(mouseX, 0, 900)/Block.blockSize;
   int y = constrain(mouseY, 0, 700)/Block.blockSize;
   if (map1.grid[y][x].buildable() && mousePressed){
-    Tower temp = new Usagi(listE, map1.grid[y][x], 10, 10, 10, 100, 10, usagi, food); //cost, damage, attackSpeed, range, level;
+    Tower temp = new Usagi(listE, map1.grid[y][x], 10, 10, 10, 10, 1000, usagi, food); // listE, cell, cost, damage, range, level, cd, sprite, food sprite
     listT.add(temp);
     println("HI");
   }
