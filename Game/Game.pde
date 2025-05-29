@@ -6,6 +6,7 @@ ArrayList<Tower> listT = new ArrayList<Tower>();
 ArrayList<Enemy> listE = new ArrayList<Enemy>();
 ArrayList<Food> listF = new ArrayList<Food>();
 ArrayList<Poop> listP = new ArrayList<Poop>();
+House houseClass;
 
 void setup(){
    size(1000, 800); // 10 columns, 8 rows
@@ -28,6 +29,7 @@ void setup(){
    map1.mapDraw(combineMap, grass, dirt, house, cave);
    combineMap.endDraw();
    wave = new Waves(listE, map1, goblin);
+   houseClass = new House(100, map1.ePtMap());
 }
 
 void draw(){
@@ -53,6 +55,7 @@ void draw(){
       {
         listE.remove(listE.get(i));
       }
+      listE.get(i).attack();
     }
   }
   for (Food food: listF){ // moved projectile movement here because it kept calling move for each additional tower placed
@@ -60,6 +63,13 @@ void draw(){
   }
   for (Poop poop: listP){
      poop.move(); 
+  }
+  houseClass.checkHealth();
+  houseClass.healthBar();
+  if (houseClass.getAlive() != true)
+  {
+    exit();
+    print("YOU LOST HAHAHHAHAHAH");
   }
 }
 
@@ -79,6 +89,18 @@ void mouseCheck(){
       {
         Tower temp = new Hachiware(listE, map1.grid[y][x], 10, 10, 10, 100, 10, 60, listP, hachiware, poop); //listE, cell, cost, damage, range, level, speed, totalcd
         listT.add(temp);
+      }
+      if (key == '3') //removing towers, doesn't work need fix
+      {
+        for (int i = listT.size() - 1; i >= 0; i--)
+        {
+          if ((listT.get(i).getCell().getx() == y) && (listT.get(i).getCell().gety() == x))
+          {
+            listT.remove(i);
+            //refund some currency when we implement it
+            break;
+          }
+        }
       }
       
     }
