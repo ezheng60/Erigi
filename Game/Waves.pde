@@ -17,8 +17,8 @@ class Waves{
   
   public void update(){
      int m = millis();
-     Goblin goblin = new Goblin(map, 100, 100, 10, 20, 5, true, spriteGoblin); //map, HP, maxHP, damage, bounty, speed, alive, sprite
-     if (m > spawnTime){
+     Goblin goblin = new Goblin(map, 100, 100, 10, 20, 2, true, spriteGoblin); //map, HP, maxHP, damage, bounty, speed, alive, sprite
+     if (m > spawnTime){ // umm so right now speed can only be factors of 100
        if (wave == 1){
          listE.add(goblin); 
          countGoblin++;

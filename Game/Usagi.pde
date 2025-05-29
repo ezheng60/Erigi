@@ -2,17 +2,12 @@ class Usagi extends Tower{
   private PImage sprite;
   private ArrayList<Food> listFood;
   private PImage foodSprite;
-
-  private int cd;
-  private int totalCD;
   
-  public Usagi(ArrayList<Enemy> listE, Block cell, int cost, int damage, int attackSpeed, int range, int level, PImage sprite, PImage foodSprite, int totalCD){
-    super(listE, cell, cost, damage, attackSpeed, range, level);
+  public Usagi(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, ArrayList<Food> listF, PImage sprite, PImage foodSprite){
+    super(listE, cell, cost, damage, range, level, speed, totalcd); // ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd
     this.sprite = sprite;
     this.foodSprite = foodSprite;
-    this.listFood = new ArrayList<Food>();
-    this.totalCD = totalCD;
-    cd = 0;
+    this.listFood = listF;
   }
   
   public void build(){
@@ -20,39 +15,40 @@ class Usagi extends Tower{
   }
   
   public void attack(){
-    if (cd > 0)
+    if (this.getcd() > 0) // every frame subtract cd
     {
-      cd--;
+      this.setcd(this.getcd()-1);
     }
     else
     {
-      for (int i = 0; i < super.listE.size(); i++)
+      for (int i = 0; i < getlistE().size(); i++)
       {
-        if (this.inRange(super.listE.get(i)))
+        if (this.inRange(getlistE().get(i)))
         {
-          listFood.add(new Food(foodSprite, new PVector(super.cell.getx() + Block.blockSize / 2, super.cell.gety() + Block.blockSize / 2), super.damage, Block.blockSize / 4, new PVector(listE.get(i).sPtEnemy().x + Block.blockSize / 2, listE.get(i).sPtEnemy().y + Block.blockSize / 2)));
-          // center of tower as initial position and center of first enemy in list as enemyPos
-          cd = totalCD;
+          listFood.add(new Food(foodSprite, new PVector(getCell().getx() + Block.blockSize/4, getCell().gety() + Block.blockSize/4), // WHATS ADDED SHOULD ALWAYS BE THE SAME AS RADIUS
+          getDamage(), getSpeed(), Block.blockSize/4, new PVector(listE.get(i).sPtEnemy().x + Block.blockSize/2, listE.get(i).sPtEnemy().y + Block.blockSize / 2)));
+          //PImage sprite, PVector position, int damage, int speed, int radius, PVector enemyPos
+          // center of tower MINUS THE RADIUS as initial position and center of first enemy in list as enemyPos
+          this.setcd(this.gettcd()); // so like totalCD = 60 would be like one second (60 fps)
           break;
         }
-        this.setcd(this.getcd()+1000);
       }
     }
   }
   
   public void foodCheck(){
-    for (int i = listFood.size() - 1; i >= 0; i--) //start at back so it's less complicated to remove foods
+    for (int i = listFood.size() - 1; i >= 0; i--) //start at back so it's less complicated to remove foods TO NOT SKIP FOODS
     {
-      listFood.get(i).move();
-      for (int e = 0; e < super.listE.size(); e++)
+      for (int e = 0; e < getlistE().size(); e++)
       {
-        if (listFood.get(i).enemyHit(super.listE.get(e).sPtEnemy()))
+        if (listFood.get(i).enemyHit(getlistE().get(e).sPtEnemy()))
         {
           listFood.remove(i);
-          //add enemies taking dmg here
+          getlistE().get(e).takeDamage(getDamage());
+          getlistE().get(e).checkHealth();
           break;
         }
-        if ((listFood.get(i).position.x > width) || (listFood.get(i).position.y > height) || (listFood.get(i).position.x < 0) || (listFood.get(i).position.y < 0))
+        if ((listFood.get(i).position.x + 2 * listFood.get(i).radius > width) || (listFood.get(i).position.y + 2 * listFood.get(i).radius > height) || (listFood.get(i).position.x < 0) || (listFood.get(i).position.y < 0))
         {
           //if food goes outside screen, remove from foodlist
           listFood.remove(i);
