@@ -93,24 +93,19 @@ void mouseCheck(){
         Tower temp = new Hachiware(listE, map1.grid[y][x], 10, 10, 10, 100, 10, 60, listP, hachiware, poop); //listE, cell, cost, damage, range, level, speed, totalcd
         listT.add(temp);
       }
-      if (key == '3') //removing towers, doesn't work need fix
-      {
-        print(3);
-        for (int i = listT.size() - 1; i >= 0; i--)
-        {
-          println("Tower coords:" + listT.get(i).getCell().getx() + listT.get(i).getCell().gety());
-          println("mouse coords:" + x + y);
-          if ((listT.get(i).getCell().getx() == mouseX) && (listT.get(i).getCell().gety() == mouseY))
-          {
-            listT.remove(i);
-            //refund some currency when we implement it
-            break;
-          }
+    }
+  }
+  if (keyPressed){
+    if (key == '3'){ //remove towers
+      for (int i = listT.size() - 1; i >= 0; i--){
+        if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize)){
+          listT.get(i).getCell().setOccupied(false);
+          listT.remove(i);
+          //refund some currency when we implement it
+          break;
         }
       }
-      
     }
-    println("HI");
-  }
-
+   }
+   println(listF.size());
 }
