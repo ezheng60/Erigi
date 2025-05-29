@@ -41,17 +41,10 @@ class Usagi extends Tower{
     {
       for (int e = 0; e < getlistE().size(); e++)
       {
-        if (listFood.get(i).enemyHit(getlistE().get(e).sPtEnemy()))
-        {
+        if (listFood.get(i).enemyHit(getlistE().get(e).sPtEnemy())){
           listFood.remove(i);
           getlistE().get(e).takeDamage(getDamage());
           getlistE().get(e).checkHealth();
-          break;
-        }
-        if ((listFood.get(i).position.x + 2 * listFood.get(i).radius > width) || (listFood.get(i).position.y + 2 * listFood.get(i).radius > height) || (listFood.get(i).position.x < 0) || (listFood.get(i).position.y < 0))
-        {
-          //if food goes outside screen, remove from foodlist
-          listFood.remove(i);
           break;
         }
       }

@@ -51,21 +51,31 @@ void draw(){
   for (int i = listE.size() - 1; i >= 0; i--){
     if (listE.get(i) instanceof Goblin){
       ((Goblin)listE.get(i)).move();
-      if (listE.get(i).getAlive() == false)
-      {
-        listE.remove(listE.get(i));
-      }
-      if (listE.size() != 0)
+      if (listE.size() > 0)
       {
         listE.get(i).attack();
       }
+      if (listE.get(i).getAlive() == false)
+      {
+        listE.remove(i); // REMOVE ENEMIES
+      }
     }
   }
-  for (Food food: listF){ // moved projectile movement here because it kept calling move for each additional tower placed
-     food.move();  //making it so that the proejctile moved faster if tehre wer emore towers
+  for (int i = listF.size()-1; i >= 0; i--){
+    listF.get(i).move();
+    if ((listF.get(i).position.x + 2 * listF.get(i).radius > width) || (listF.get(i).position.y + 2 * listF.get(i).radius > height) || (listF.get(i).position.x < 0) || (listF.get(i).position.y < 0))
+    {
+      listF.remove(i); //if food goes outside screen, remove from foodlist
+      break;
+    }  
   }
-  for (Poop poop: listP){
-     poop.move(); 
+  for (int i = listP.size()-1; i >= 0; i--){
+    listP.get(i).move();
+    if ((listP.get(i).position.x + 2 * listP.get(i).radius > width) || (listP.get(i).position.y + 2 * listP.get(i).radius > height) || (listP.get(i).position.x < 0) || (listP.get(i).position.y < 0))
+    {
+      listP.remove(i); //if food goes outside screen, remove from foodlist
+      break;
+    }  
   }
   houseClass.checkHealth();
   houseClass.healthBar();
@@ -107,5 +117,5 @@ void mouseCheck(){
       }
     }
    }
-   println(listF.size());
+   println(listP.size());
 }

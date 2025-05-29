@@ -49,12 +49,6 @@ class Hachiware extends Tower{
           getlistE().get(e).checkHealth();
           break;
         }
-        if ((listPoop.get(i).position.x + 2 * listPoop.get(i).radius > width) || (listPoop.get(i).position.y + 2 * listPoop.get(i).radius > height) || (listPoop.get(i).position.x < 0) || (listPoop.get(i).position.y < 0))
-        {
-          //if Poop goes outside screen, remove from Pooplist
-          listPoop.remove(i);
-          break;
-        }
       }
     } 
   }
