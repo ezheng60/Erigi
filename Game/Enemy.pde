@@ -82,4 +82,11 @@ abstract class Enemy{
   public boolean getAlive(){
     return alive;
   }
+  
+  public void attack(){
+    if ((sPt.x == houseClass.getCoords().x) && (sPt.y == houseClass.getCoords().y))
+    {
+      houseClass.takeDamage(damage);
+    }
+  }
 }
