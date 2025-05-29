@@ -35,9 +35,11 @@ public class House{
   
   public void healthBar()
   {
+    fill(0);
+    textSize(Block.blockSize / 6);
+    text("Health: ", width - 2.25 * Block.blockSize, Block.blockSize/6);
     noStroke();
     int currGreen = greenColor - (int) (150 * ((float) (maxHP - HP)/maxHP));
-    println(greenColor);
     fill(123, currGreen, 28);
     rect(width - 2.25 * Block.blockSize, Block.blockSize/4, 2 * Block.blockSize * ((float) HP/maxHP), Block.blockSize/2);
     stroke(0);
