@@ -55,7 +55,10 @@ void draw(){
       {
         listE.remove(listE.get(i));
       }
-      listE.get(i).attack();
+      if (listE.size() != 0)
+      {
+        listE.get(i).attack();
+      }
     }
   }
   for (Food food: listF){ // moved projectile movement here because it kept calling move for each additional tower placed
