@@ -95,9 +95,12 @@ void mouseCheck(){
       }
       if (key == '3') //removing towers, doesn't work need fix
       {
+        print(3);
         for (int i = listT.size() - 1; i >= 0; i--)
         {
-          if ((listT.get(i).getCell().getx() == y) && (listT.get(i).getCell().gety() == x))
+          println("Tower coords:" + listT.get(i).getCell().getx() + listT.get(i).getCell().gety());
+          println("mouse coords:" + x + y);
+          if ((listT.get(i).getCell().getx() == mouseX) && (listT.get(i).getCell().gety() == mouseY))
           {
             listT.remove(i);
             //refund some currency when we implement it
