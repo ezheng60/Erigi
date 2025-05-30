@@ -1,0 +1,55 @@
+class Chiikawa extends Tower{
+  private PImage sprite;
+  private ArrayList<Tower> listT;
+  
+  public Chiikawa(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, PImage sprite, ArrayList<Tower> listT){
+    super(listE, cell, cost, damage, range, level, speed, totalcd); // ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd
+    this.sprite = sprite;
+    this.listT = listT;
+  }
+  
+  public void build(){
+    super.build(sprite);
+  }
+  
+  public boolean inRange(Tower tower){
+    if (PVector.dist(new PVector(this.getCell().getx(), this.getCell().gety()), new PVector(tower.getCell().getx(), tower.getCell().gety())) < this.getRange()){
+      return true;
+    }
+    return false;
+  }
+  
+  public void buff(){
+    for (Tower tower: listT){
+      if (!(tower instanceof Chiikawa) && inRange(tower)){
+        tower.setRange(tower.getRange()+this.getRange());
+        tower.setDamage(tower.getDamage()+this.getDamage());
+        tower.setSpeed(tower.getSpeed()+this.getSpeed());
+        println(this.getRange());
+      } 
+    }
+  }
+  
+  public void buff(Tower tower){
+    if (!(tower instanceof Chiikawa) && inRange(tower)){
+      tower.setRange(tower.getRange()+this.getRange());
+      tower.setDamage(tower.getDamage()+this.getDamage());
+      tower.setSpeed(tower.getSpeed()+this.getSpeed());
+      println(this.getRange());
+    } 
+  }
+  
+  public void removeBuff(){
+    for (Tower tower: listT){
+      if (!(tower instanceof Chiikawa) && inRange(tower)){
+        tower.setRange(tower.getRange()-this.getRange());
+        tower.setDamage(tower.getDamage()-this.getDamage());
+        tower.setSpeed(tower.getSpeed()-this.getSpeed());
+        println("REMOVED");
+      } 
+    }
+  }
+  
+  
+  
+}

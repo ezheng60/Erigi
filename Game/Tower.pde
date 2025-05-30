@@ -24,8 +24,20 @@ abstract class Tower{
   public int getDamage(){
     return damage; 
   }
+  public void setDamage(int damage){
+    this.damage = damage;
+  }
   public int getSpeed(){
     return speed; 
+  }
+  public void setSpeed(int spd){
+    this.speed = spd;
+  }
+  public int getRange(){
+    return range; 
+  }
+  public void setRange(int range){
+    this.range = range; 
   }
   public int getcd(){
     return cd;  
@@ -46,7 +58,7 @@ abstract class Tower{
   }
     
   public boolean inRange(Enemy enemy){
-    if (PVector.dist(new PVector(cell.getx(), cell.gety()), enemy.sPtEnemy()) < 150){
+    if (PVector.dist(new PVector(cell.getx(), cell.gety()), enemy.sPtEnemy()) < range){
       return true;
     }
     return false;
@@ -75,6 +87,18 @@ abstract class Tower{
   }
   
   public void poopCheck()
+  {
+  }
+  
+  public void buff()
+  {
+  }
+  
+  public void buff(Tower tower)
+  {
+  }
+  
+  public void removeBuff()
   {
   }
   

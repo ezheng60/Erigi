@@ -27,7 +27,11 @@ class Hachiware extends Tower{
         {
           listPoop.add(new Poop(poopSprite, new PVector(getCell().getx() + Block.blockSize/4, getCell().gety() + Block.blockSize/4),
           getDamage(), getSpeed(), Block.blockSize/4, new PVector(listE.get(i).sPtEnemy().x + Block.blockSize / 2, listE.get(i).sPtEnemy().y + Block.blockSize / 2)));
-          //PImage sprite, PVector position, int damage, int speed, int radius, PVector enemyPos
+          listPoop.add(new Poop(poopSprite, new PVector(getCell().getx() + Block.blockSize/4, getCell().gety() + Block.blockSize/4),
+          getDamage(), getSpeed(), Block.blockSize/4, new PVector(listE.get(i).sPtEnemy().x, listE.get(i).sPtEnemy().y)));
+          listPoop.add(new Poop(poopSprite, new PVector(getCell().getx() + Block.blockSize/4, getCell().gety() + Block.blockSize/4),
+          getDamage(), getSpeed(), Block.blockSize/4, new PVector(listE.get(i).sPtEnemy().x + Block.blockSize, listE.get(i).sPtEnemy().y + Block.blockSize))); //TRIP:E POOP
+          //PImage sprite, PVector position, int damage, int speed, int radius, int explosionSize, PVector enemyPos
           // center of tower as initial position and center of first enemy in list as enemyPos
           this.setcd(this.gettcd()); // so like totalCD = 60 would be like one second (60 fps)
           break;
