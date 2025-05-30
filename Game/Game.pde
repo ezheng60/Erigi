@@ -1,4 +1,4 @@
-PImage grass, dirt, house, cave, usagi, goblin, chiikawa, hachiware, food, poop;
+PImage grass, dirt, house, cave, usagi, goblin, dekatsuyo, momonga, chiikawa, hachiware, food, poop;
 Map map1;
 Waves wave;
 PGraphics combineMap;
@@ -18,6 +18,10 @@ void setup(){
    cave = loadImage("cave.png");
    goblin = loadImage("goblin.PNG");
    goblin.resize(100, 100);
+   dekatsuyo = loadImage("dekatsuyo.png");
+   dekatsuyo.resize(100, 100);
+   momonga = loadImage("momonga.png");
+   momonga.resize(100, 100);
    usagi = loadImage("usagi.png");
    usagi.resize(100, 100);
    food = loadImage("food.png");
@@ -29,7 +33,7 @@ void setup(){
    combineMap.beginDraw(); // so that our game doesnt lage
    map1.mapDraw(combineMap, grass, dirt, house, cave);
    combineMap.endDraw();
-   wave = new Waves(listE, map1, goblin);
+   wave = new Waves(listE, map1, goblin, dekatsuyo, momonga);
    houseClass = new House(100, map1.ePtMap());
    delay(1000);
 }

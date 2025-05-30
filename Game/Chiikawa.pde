@@ -35,7 +35,6 @@ class Chiikawa extends Tower{
       tower.setRange(tower.getRange()+this.getRange());
       tower.setDamage(tower.getDamage()+this.getDamage());
       tower.setSpeed(tower.getSpeed()+this.getSpeed());
-      println(this.getRange());
     } 
   }
   
@@ -45,7 +44,6 @@ class Chiikawa extends Tower{
         tower.setRange(tower.getRange()-this.getRange());
         tower.setDamage(tower.getDamage()-this.getDamage());
         tower.setSpeed(tower.getSpeed()-this.getSpeed());
-        println("REMOVED");
       } 
     }
   }
