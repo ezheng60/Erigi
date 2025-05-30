@@ -7,6 +7,7 @@ ArrayList<Enemy> listE = new ArrayList<Enemy>();
 ArrayList<Food> listF = new ArrayList<Food>();
 ArrayList<Poop> listP = new ArrayList<Poop>();
 House houseClass;
+Currency currency;
 
 void setup(){
    size(1000, 800, P2D); // 10 columns, 8 rows
