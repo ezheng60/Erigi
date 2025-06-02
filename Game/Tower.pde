@@ -3,9 +3,8 @@ abstract class Tower{
   private int cd = 0; // cd is like timer on attacks
   private Block cell;
   private ArrayList<Enemy> listE;
-  private Currency currency;
   
-  public Tower(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, Currency currency){
+  public Tower(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd){
     this.listE = listE;
     this.cell = cell;
     this.cost = cost;
@@ -14,7 +13,6 @@ abstract class Tower{
     this.level = level;
     this.speed = speed;
     this.totalcd = totalcd;
-    this.currency = currency;
   }
   
   public ArrayList<Enemy> getlistE(){
@@ -52,9 +50,6 @@ abstract class Tower{
   }
   public void settcd(int cd){
     this.totalcd = cd;
-  }
-  public Currency getCurrency(){
-    return currency; 
   }
   
   public void build(PImage sprite){  // OK SO THIS TAKES A SPRITE SO IN THE SUBCLASS YOU PUT THE SPRITE THERE AND DO SUPER.MOVE AND USE THE SPRITE AS AN INPUT
@@ -105,6 +100,11 @@ abstract class Tower{
   
   public void removeBuff()
   {
+  }
+  
+  public int getCost()
+  {
+    return cost;
   }
   
 }

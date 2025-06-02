@@ -3,8 +3,8 @@ class Usagi extends Tower{
   private ArrayList<Food> listFood;
   private PImage foodSprite;
   
-  public Usagi(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, Currency currency, ArrayList<Food> listF, PImage sprite, PImage foodSprite){
-    super(listE, cell, cost, damage, range, level, speed, totalcd, currency); // ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd
+  public Usagi(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, ArrayList<Food> listF, PImage sprite, PImage foodSprite){
+    super(listE, cell, cost, damage, range, level, speed, totalcd); // ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd
     this.sprite = sprite;
     this.foodSprite = foodSprite;
     this.listFood = listF;
