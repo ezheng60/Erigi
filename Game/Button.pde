@@ -1,18 +1,20 @@
 class Button{
   private boolean on;
   private PVector position, size;
-  private int borderSize;
-  private color border, backgroundOff, backgroundOn; // COLORS
+  private int borderSize, textSize;
+  private color border, backgroundOff, backgroundOn, textColor; // COLORS
   private String text;
   
-  public Button(PVector position, PVector size, int borderSize, color border, color backgroundOff, color backgroundOn, String text){
+  public Button(PVector position, PVector size, int textSize, int borderSize, color border, color backgroundOff, color backgroundOn, color textColor, String text){
     this.on = false;
     this.borderSize = borderSize;
     this.position = position;
     this.size = size;
+    this.textSize = textSize;
     this.border = border;
     this.backgroundOff = backgroundOff;
     this.backgroundOn = backgroundOn;
+    this.textColor = textColor;
     this.text = text;
   }
   
@@ -38,13 +40,19 @@ class Button{
     }
     rect(position.x, position.y, size.x, size.y);
     noFill();
-    fill(color(0,0,0));
+    fill(textColor);
     textAlign(CENTER, CENTER);
+    textSize(textSize);
     text(text, position.x, position.y, size.x, size.y);
     noFill();
   }
   
-  
+  public boolean clicked(){
+    if (on && mousePressed){
+      return true; 
+    }
+    return false;
+  }
   
   
 }

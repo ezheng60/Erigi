@@ -10,7 +10,8 @@ ArrayList<Poop> listP = new ArrayList<Poop>();
 House houseClass;
 Currency currency;
 boolean menu, game, gameOver;
-Button menuButton;
+Menu mainMenu;
+Gameover gameover;
 
 void setup(){
    size(1000, 800, P2D); // 10 columns, 8 rows
@@ -37,19 +38,30 @@ void setup(){
    map1.mapDraw(combineMap, grass, dirt, house, cave);
    combineMap.endDraw();
    wave = new Waves(listE, map1, goblin, dekatsuyo, momonga, currency);
-   houseClass = new House(100, map1.ePtMap());
-   font = createFont("font.ttf", 20);
+   houseClass = new House(1, map1.ePtMap());
+   font = createFont("font.ttf", 100);
    textFont(font);
    menu = true;
-   menuButton = new Button(new PVector(width/2, height/2), new PVector(200, 200), 5, color(181, 126, 83), color(255, 194, 148), color(191, 105, 38), "wewewewewHI");
+   mainMenu = new Menu();
+   gameover = new Gameover();
    //PVector position, PVector size, int borderSize, color border, color backgroundOff, color backgroundOn, String text
 }
 
 void draw(){
   if (menu){
-   background(color(255,185,222));
-   menuButton.isOn();
-   menuButton.drawButton();
+    mainMenu.menuDraw();
+    if (mainMenu.next()){
+      menu = false;
+      game = true;
+    }
+  }
+  if (gameOver){
+    gameover.overDraw();
+    if (gameover.next()){
+      gameOver = false;
+      restart();
+      game = true;
+    }
   }
   // BELOW IS GAME
   if (game){
@@ -106,8 +118,8 @@ void draw(){
     houseClass.healthBar();
     if (houseClass.getAlive() != true)
     {
-      exit();
-      print("YOU LOST HAHAHHAHAHAH");
+      game = false;
+      gameOver = true;
     }
   }
 }
@@ -164,4 +176,16 @@ void mouseCheck(){
       }
      }
   }
+}
+
+void restart(){
+  map1 = new Map();
+  listT.clear();
+  listE.clear();
+  listP.clear();
+  listF.clear();
+  wave = new Waves(listE, map1, goblin, dekatsuyo, momonga, currency);
+  houseClass = new House(1, map1.ePtMap());
+
+
 }
