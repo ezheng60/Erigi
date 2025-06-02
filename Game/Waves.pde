@@ -28,9 +28,9 @@ class Waves{
        cd--;
      }
      else{
-       Goblin goblin = new Goblin(map, gHP, gHP, 5, 20, 4, true, spriteGoblin); //map, HP, maxHP, damage, bounty, speed, alive, sprite
+       Goblin goblin = new Goblin(map, gHP, gHP, 5, 5, 4, true, spriteGoblin); //map, HP, maxHP, damage, bounty, speed, alive, sprite
        Goblin dekatsuyo = new Goblin(map, dHP, dHP, 20, 20, 2, true, spriteDekatsuyo); //map, HP, maxHP, damage, bounty, speed, alive, sprite
-       Goblin momonga = new Goblin(map, mHP, mHP, 5, 20, 10, true, spriteMomonga);  //map, HP, maxHP, damage, bounty, speed, alive, sprite
+       Goblin momonga = new Goblin(map, mHP, mHP, 5, 10, 10, true, spriteMomonga);  //map, HP, maxHP, damage, bounty, speed, alive, sprite
        if (wave == 1){
          listE.add(goblin); 
          count1++;

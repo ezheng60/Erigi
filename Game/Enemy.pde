@@ -101,4 +101,8 @@ abstract class Enemy{
       houseClass.takeDamage(damage);
     }
   }
+  
+  public int getBounty(){
+    return bounty;
+  }
 }

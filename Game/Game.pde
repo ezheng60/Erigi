@@ -84,6 +84,7 @@ void draw(){
         }
         if (listE.get(i).getAlive() == false)
         {
+          currency.addMoney(listE.get(i).getBounty());
           listE.remove(i); // REMOVE ENEMIES
         }
       }
@@ -125,7 +126,7 @@ void mouseCheck(){
       {
         if (key == '1')
         {
-          Tower temp = new Usagi(listE, map1.grid[y][x], 10, 10, 150, 1, 2, 60, listF, usagi, food); //listE, cell, cost, damage, range, level, speed, totalcd
+          Tower temp = new Usagi(listE, map1.grid[y][x], 25, 10, 150, 1, 2, 60, listF, usagi, food); //listE, cell, cost, damage, range, level, speed, totalcd
           if (temp.getCost() <= currency.getMoney())
           {
             for (Tower part: listT){
@@ -140,7 +141,7 @@ void mouseCheck(){
         
         if (key == '2')
         {
-          Tower temp = new Hachiware(listE, map1.grid[y][x], 10, 10, 150, 1, 5, 60, listP, hachiware, poop); //listE, cell, cost, damage, range, level, speed, totalcd
+          Tower temp = new Hachiware(listE, map1.grid[y][x], 40, 10, 150, 1, 5, 60, listP, hachiware, poop); //listE, cell, cost, damage, range, level, speed, totalcd
           if (temp.getCost() <= currency.getMoney())
           {
             for (Tower part: listT){
@@ -154,7 +155,7 @@ void mouseCheck(){
         }
         if (key == '3')
         {
-          Tower temp = new Chiikawa(listE, map1.grid[y][x], 10, 10, 10000, 1, 5, 60, chiikawa, listT); //listE, cell, cost, damage, range, level, speed, totalcd, sprite, listT
+          Tower temp = new Chiikawa(listE, map1.grid[y][x], 80, 10, 10000, 1, 5, 60, chiikawa, listT); //listE, cell, cost, damage, range, level, speed, totalcd, sprite, listT
           if (temp.getCost() <= currency.getMoney())
           {
             temp.buff(); // ADDING BUFF HERE SO THAT IT DOESNT KEEP LOOPING IN DRAW
