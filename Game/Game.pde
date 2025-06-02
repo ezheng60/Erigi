@@ -9,7 +9,7 @@ ArrayList<Food> listF = new ArrayList<Food>();
 ArrayList<Poop> listP = new ArrayList<Poop>();
 House houseClass;
 Currency currency;
-boolean menu, game, gameOver;
+boolean menu, game, gameOver, win;
 Menu mainMenu;
 Gameover gameover;
 
@@ -40,7 +40,7 @@ void setup(){
    map1.mapDraw(combineMap, grass, dirt, house, cave);
    combineMap.endDraw();
    wave = new Waves(listE, map1, goblin, dekatsuyo, momonga, currency);
-   houseClass = new House(1, map1.ePtMap());
+   houseClass = new House(100, map1.ePtMap());
    font = createFont("font.ttf", 100);
    textFont(font);
    menu = true;
@@ -58,9 +58,17 @@ void draw(){
     }
   }
   if (gameOver){
-    gameover.overDraw();
+    gameover.overDraw(0);
     if (gameover.next()){
       gameOver = false;
+      restart();
+      game = true;
+    }
+  }
+  if (win){
+    gameover.overDraw(1);
+    if (gameover.next()){
+      win = false;
       restart();
       game = true;
     }
@@ -127,6 +135,9 @@ void draw(){
     {
       game = false;
       gameOver = true;
+    }
+    if (wave.getWave() > 10 && listE.size() == 0){
+      win = true;
     }
   }
 }
@@ -204,7 +215,6 @@ void restart(){
   listP.clear();
   listF.clear();
   wave = new Waves(listE, map1, goblin, dekatsuyo, momonga, currency);
-  houseClass = new House(1, map1.ePtMap());
-
-
+  houseClass = new House(100, map1.ePtMap());
+  currency = new Currency(100, bill);
 }

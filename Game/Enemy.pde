@@ -1,3 +1,4 @@
+
 abstract class Enemy{
   private boolean[][] passed;
   private int HP, maxHP, damage, bounty, speed;

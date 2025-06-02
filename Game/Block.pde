@@ -17,7 +17,6 @@ class Block{
   public int gety(){
     return y;
   }
-  
   public boolean getPath(){
     return path;
   }

@@ -185,9 +185,11 @@ class Waves{
         }
        }
        this.cd = totalcd;
-       println(wave);
+       println("WAVE:" + wave);
      }
   }
   
-  
+  public int getWave(){
+    return wave; 
+  }
 }
