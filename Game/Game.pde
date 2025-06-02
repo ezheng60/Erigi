@@ -84,7 +84,10 @@ void draw(){
         }
         if (listE.get(i).getAlive() == false)
         {
-          currency.addMoney(listE.get(i).getBounty());
+          if (listE.get(i).isAtHouse() == false)
+          {
+            currency.addMoney(listE.get(i).getBounty());
+          }
           listE.remove(i); // REMOVE ENEMIES
         }
       }
