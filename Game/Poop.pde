@@ -18,7 +18,6 @@ class Poop{
  
  public void move(){
    position.add(v);
-   square(position.x, position.y, 50);   
    image(sprite, position.x, position.y, 2*radius, 2*radius);
  }
  

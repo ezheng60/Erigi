@@ -66,6 +66,18 @@ abstract class Enemy{
   public int getDistance(){
     return distance; 
   }
+  public void setHP(int temp){
+    this.HP = temp; 
+  }
+  public int getHP(){
+    return HP; 
+  }
+  public void setMaxHP(int temp){
+    this.maxHP = temp; 
+  }
+  public int getMaxHP(){
+    return maxHP; 
+  }
   
   public void takeDamage(int damage){
     if (alive){
