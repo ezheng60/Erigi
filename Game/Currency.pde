@@ -1,5 +1,5 @@
 class Currency{
-  private int money; // should this be a pvector
+  private int money; 
   
   public Currency(int money){
     this.money = money;
