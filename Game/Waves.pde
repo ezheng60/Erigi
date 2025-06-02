@@ -169,7 +169,7 @@ class Waves{
             count3 = 0;
             currency.addMoney(100);
          }
-       }
+       } 
        else if (wave == 10){
          dHP = 1000;
          if (count3 <= 20){
@@ -183,11 +183,9 @@ class Waves{
         if (count3 > 20 && count2 > 20){
           currency.addMoney(100);
         }
-       }
+       } 
        this.cd = totalcd;
        println(wave);
      }
   }
-  
-  
 }

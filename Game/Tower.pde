@@ -107,4 +107,12 @@ abstract class Tower{
     return cost;
   }
   
+  public void upgrade()
+  {
+    this.damage = (int)(1.5 * damage);
+    this.range = (int)(1.5 * range);
+    this.totalcd = (int)(1.2 * totalcd);
+    this.level += 1;
+  }
+  
 }
