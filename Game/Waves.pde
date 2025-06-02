@@ -28,15 +28,16 @@ class Waves{
        cd--;
      }
      else{
-       Goblin goblin = new Goblin(map, gHP, gHP, 5, 20, 4, true, spriteGoblin); //map, HP, maxHP, damage, bounty, speed, alive, sprite
+       Goblin goblin = new Goblin(map, gHP, gHP, 5, 5, 4, true, spriteGoblin); //map, HP, maxHP, damage, bounty, speed, alive, sprite
        Goblin dekatsuyo = new Goblin(map, dHP, dHP, 20, 20, 2, true, spriteDekatsuyo); //map, HP, maxHP, damage, bounty, speed, alive, sprite
-       Goblin momonga = new Goblin(map, mHP, mHP, 5, 20, 10, true, spriteMomonga);  //map, HP, maxHP, damage, bounty, speed, alive, sprite
+       Goblin momonga = new Goblin(map, mHP, mHP, 5, 10, 10, true, spriteMomonga);  //map, HP, maxHP, damage, bounty, speed, alive, sprite
        if (wave == 1){
          listE.add(goblin); 
          count1++;
          if (count1 == 4){
             wave = 2;
             count1 = 0;
+            currency.addMoney(100);
          }
        }
        else if (wave == 2){
@@ -45,6 +46,7 @@ class Waves{
          if (count1 == 7){
             wave = 3;
             count1 = 0;
+            currency.addMoney(100);
          }
        }
        else if (wave == 3){
@@ -60,6 +62,7 @@ class Waves{
             wave = 4;
             count1 = 0;
             count2 = 0;
+            currency.addMoney(100);
          }
        }
        else if (wave == 4){
@@ -76,6 +79,7 @@ class Waves{
             wave = 5;
             count1 = 0;
             count2 = 0;
+            currency.addMoney(100);
          }
        }
        else if (wave == 5){
@@ -92,6 +96,7 @@ class Waves{
             wave = 6;
             count1 = 0;
             count2 = 0;
+            currency.addMoney(100);
          }
        }
        else if (wave == 6){
@@ -112,6 +117,7 @@ class Waves{
             count1 = 0;
             count2 = 0;
             count3 = 0;
+            currency.addMoney(100);
          }
        }
        else if (wave == 7){
@@ -129,6 +135,7 @@ class Waves{
             wave = 8;
             count2 = 0;
             count3 = 0;
+            currency.addMoney(100);
          }
        }
        else if (wave == 8){
@@ -144,6 +151,7 @@ class Waves{
             wave = 9;
             count2 = 0;
             count3 = 0;
+            currency.addMoney(100);
          }
        }
        else if (wave == 9){
@@ -159,6 +167,7 @@ class Waves{
             wave = 10;
             count2 = 0;
             count3 = 0;
+            currency.addMoney(100);
          }
        }
        else if (wave == 10){
@@ -171,6 +180,9 @@ class Waves{
             wave = 11;
             count3 = 0;
          }
+        if (count3 > 20 && count2 > 20){
+          currency.addMoney(100);
+        }
        }
        this.cd = totalcd;
        println(wave);

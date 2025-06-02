@@ -37,7 +37,7 @@ public class House{
   {
     fill(0);
     textSize(Block.blockSize / 6);
-    text("Health: ", width - 2.25 * Block.blockSize, Block.blockSize/6);
+    text("Health: ", width - 2 * Block.blockSize, Block.blockSize/6);
     noStroke();
     int currGreen = greenColor - (int) (150 * ((float) (maxHP - HP)/maxHP));
     fill(123, currGreen, 28);

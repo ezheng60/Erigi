@@ -3,8 +3,8 @@ class Hachiware extends Tower{
   private ArrayList<Poop> listPoop;
   private PImage poopSprite;
   
-  public Hachiware(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, Currency currency, ArrayList<Poop> listP, PImage sprite, PImage poopSprite){
-    super(listE, cell, cost, damage, range, level, speed, totalcd, currency); // ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd
+  public Hachiware(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, ArrayList<Poop> listP, PImage sprite, PImage poopSprite){
+    super(listE, cell, cost, damage, range, level, speed, totalcd); // ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd
     this.sprite = sprite;
     this.poopSprite = poopSprite;
     this.listPoop = listP;

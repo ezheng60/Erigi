@@ -3,6 +3,7 @@ abstract class Enemy{
   private int HP, maxHP, damage, bounty, speed;
   private int distance = 0; // this is to track how far along the enemy is so that the towers can target the first enemy
   private boolean alive;
+  private boolean atHouse = false;
   private PVector sPt, mPt, ePt; // sPt is basically like the position vector
   private int index = 0;
   private PVector[] dir = {new PVector(0, 1), //down
@@ -36,6 +37,7 @@ abstract class Enemy{
   
   public void move(PImage pic){ // OK SO THIS TAKES A SPRITE SO IN THE SUBCLASS YOU PUT THE SPRITE THERE AND DO SUPER.MOVE AND USE THE SPRITE AS AN INPUT
     if(sPt.equals(ePt)){ // once enemy reaces house stop
+      atHouse = true;
       alive = false;
       return; 
     }
@@ -100,5 +102,14 @@ abstract class Enemy{
     {
       houseClass.takeDamage(damage);
     }
+  }
+  
+  public int getBounty(){
+    return bounty;
+  }
+  
+  public boolean isAtHouse()
+  {
+    return atHouse;
   }
 }
