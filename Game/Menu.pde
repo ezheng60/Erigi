@@ -7,7 +7,7 @@ class Menu{
   private String text = "Play";
   private String head = "Chiikawa's Awesome Tower Defense";
   PImage chiikawa = loadImage("chiikawa.png");
-  PImage background = loadImage("menuBG.jpeg");
+  PImage background = loadImage("menuBG.PNG");
 
   public Menu(){
     start = new Button(new PVector(50, 300), new PVector(300, 100), 75, 5, border,backgroundOff, backgroundOn, textColor, text);
@@ -16,7 +16,7 @@ class Menu{
   }
   
   public void menuDraw(){
-    background(color(249,201,226));
+    background(background);
     textAlign(LEFT);
     text(head, 50, 50, 1000, 400);
     image(chiikawa, 425, 125, 500, 500);
