@@ -1,4 +1,4 @@
-PImage grass, dirt, house, cave, usagi, goblin, dekatsuyo, momonga, chiikawa, hachiware, 
+PImage grass, dirt, house, cave, usagi, goblin, dekatsuyo, momonga, chiikawa, hachiware, backgroundMenu, 
 food, poop, bill, usagi2, chiikawa2, hachiware2, toiletPaper, food2;
 Map map1;
 Waves wave;
@@ -17,6 +17,7 @@ Gameover gameover;
 void setup(){
    size(1000, 800, P2D); // 10 columns, 8 rows
    frameRate(60);
+   backgroundMenu = loadImage("menuBG.jpeg");
    grass = loadImage("grass.jpg"); 
    dirt = loadImage("dirt.png");
    house = loadImage("house.PNG");

@@ -5,19 +5,21 @@ class Menu{
   private color backgroundOff = color(216,225,232);
   private color backgroundOn = color(152,186,213);
   private String text = "Play";
-  private String head = "Chiikawa's Awesome Tower Defense Game";
+  private String head = "Chiikawa's Awesome Tower Defense";
   PImage chiikawa = loadImage("chiikawa.png");
+  PImage background = loadImage("menuBG.jpeg");
 
   public Menu(){
-    start = new Button(new PVector(50, 325), new PVector(300, 100), 75, 5, border,backgroundOff, backgroundOn, textColor, text);
-    rules = new Button(new PVector(50, 475), new PVector(300, 100), 75, 5, border,backgroundOff, backgroundOn, textColor, "Rules");
+    start = new Button(new PVector(50, 300), new PVector(300, 100), 75, 5, border,backgroundOff, backgroundOn, textColor, text);
+    rules = new Button(new PVector(50, 450), new PVector(300, 100), 75, 5, border,backgroundOff, backgroundOn, textColor, "Rules");
     // PVector position, PVector size, textSize, int borderSize, color border, color backgroundOff, color backgroundOn, textColor, String text
   }
   
   public void menuDraw(){
     background(color(249,201,226));
-    text(head, 0, 0, 1000, 400);
-    image(chiikawa, 700, 300, 300, 300);
+    textAlign(LEFT);
+    text(head, 50, 50, 1000, 400);
+    image(chiikawa, 425, 125, 500, 500);
     rules.drawButton();
     rules.isOn();
     start.drawButton(); 
