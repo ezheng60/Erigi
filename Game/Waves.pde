@@ -28,9 +28,9 @@ class Waves{
        cd--;
      }
      else{
-       Goblin goblin = new Goblin(map, gHP, gHP, 5, 5, 4, true, spriteGoblin); //map, HP, maxHP, damage, bounty, speed, alive, sprite
-       Goblin dekatsuyo = new Goblin(map, dHP, dHP, 20, 20, 2, true, spriteDekatsuyo); //map, HP, maxHP, damage, bounty, speed, alive, sprite
-       Goblin momonga = new Goblin(map, mHP, mHP, 5, 10, 10, true, spriteMomonga);  //map, HP, maxHP, damage, bounty, speed, alive, sprite
+       Goblin goblin = new Goblin(map, gHP, gHP, 5, 5, 2, true, spriteGoblin); //map, HP, maxHP, damage, bounty, speed, alive, sprite
+       Goblin dekatsuyo = new Goblin(map, dHP, dHP, 20, 20, 1, true, spriteDekatsuyo); //map, HP, maxHP, damage, bounty, speed, alive, sprite
+       Goblin momonga = new Goblin(map, mHP, mHP, 4, 10, 10, true, spriteMomonga);  //map, HP, maxHP, damage, bounty, speed, alive, sprite
        if (wave == 1){
          listE.add(goblin); 
          count1++;
@@ -83,7 +83,7 @@ class Waves{
          }
        }
        else if (wave == 5){
-         mHP = 150;
+         mHP = 100;
          if (count1  <= 5){
             listE.add(goblin);
             count1++; 
@@ -121,7 +121,7 @@ class Waves{
          }
        }
        else if (wave == 7){
-         mHP = 300;
+         mHP = 150;
          dHP = 750;
          if (count2 <= 10){
             listE.add(momonga);
@@ -169,7 +169,7 @@ class Waves{
             count3 = 0;
             currency.addMoney(100);
          }
-       }
+       } 
        else if (wave == 10){
          dHP = 1000;
          if (count3 <= 20){
@@ -183,9 +183,8 @@ class Waves{
         if (count3 > 20 && count2 > 20){
           currency.addMoney(100);
         }
-       }
+       } 
        this.cd = totalcd;
-       println("WAVE:" + wave);
      }
   }
   

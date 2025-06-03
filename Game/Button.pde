@@ -19,7 +19,6 @@ class Button{
   }
   
   public void isOn(){
-    println(on);
     if (mouseX > position.x && mouseX < size.x+position.x && mouseY > position.y && mouseY < size.y+position.y){
       on = true;
       return;

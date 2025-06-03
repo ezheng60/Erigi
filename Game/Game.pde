@@ -1,4 +1,5 @@
-PImage grass, dirt, house, cave, usagi, goblin, dekatsuyo, momonga, chiikawa, hachiware, food, poop, bill;
+PImage grass, dirt, house, cave, usagi, goblin, dekatsuyo, momonga, chiikawa, hachiware, 
+food, poop, bill, usagi2, chiikawa2, hachiware2, toiletPaper, food2;
 Map map1;
 Waves wave;
 PGraphics combineMap;
@@ -32,7 +33,12 @@ void setup(){
    poop = loadImage("poop.PNG");
    hachiware = loadImage("hachiware.png");
    chiikawa = loadImage("chiikawa.png");
+   hachiware2 = loadImage("hachiware2.png");
+   chiikawa2 = loadImage("chiikawa2.PNG");
+   usagi2 = loadImage("usagi2.png");
+   toiletPaper = loadImage("toiletPaper.PNG");
    bill = loadImage("bill.PNG");
+   food2 = loadImage("food2.PNG");
    currency = new Currency(100, bill);
    map1 = new Map();
    combineMap = createGraphics(width, height); // this makes all the images into one
@@ -90,7 +96,7 @@ void draw(){
         part.poopCheck();
       }
       if (part instanceof Chiikawa){
-        ((Chiikawa)part).build(chiikawa);
+        ((Chiikawa)part).build();
       }
     }
     
@@ -138,6 +144,7 @@ void draw(){
     }
     if (wave.getWave() > 10 && listE.size() == 0){
       win = true;
+      game = false;
     }
   }
 }
@@ -151,7 +158,7 @@ void mouseCheck(){
       {
         if (key == '1')
         {
-          Tower temp = new Usagi(listE, map1.grid[y][x], 25, 10, 150, 1, 2, 60, listF, usagi, food); //listE, cell, cost, damage, range, level, speed, totalcd
+          Tower temp = new Usagi(listE, map1.grid[y][x], 25, 10, 150, 1, 2, 60, listF, usagi, food, usagi2, food2); //listE, cell, cost, damage, range, level, speed, totalcd, listF, sprite, foodSprite, upgradedSprite, upgradedFood
           if (temp.getCost() <= currency.getMoney())
           {
             for (Tower part: listT){
@@ -166,7 +173,7 @@ void mouseCheck(){
         
         if (key == '2')
         {
-          Tower temp = new Hachiware(listE, map1.grid[y][x], 40, 10, 150, 1, 5, 60, listP, hachiware, poop); //listE, cell, cost, damage, range, level, speed, totalcd
+          Tower temp = new Hachiware(listE, map1.grid[y][x], 40, 10, 150, 1, 5, 60, listP, hachiware, poop, hachiware2, toiletPaper); //listE, cell, cost, damage, range, level, speed, totalcd, listP, sprite, upgradedSprite, toiletPaper
           if (temp.getCost() <= currency.getMoney())
           {
             for (Tower part: listT){
@@ -180,7 +187,7 @@ void mouseCheck(){
         }
         if (key == '3')
         {
-          Tower temp = new Chiikawa(listE, map1.grid[y][x], 80, 10, 10000, 1, 5, 60, chiikawa, listT); //listE, cell, cost, damage, range, level, speed, totalcd, sprite, listT
+          Tower temp = new Chiikawa(listE, map1.grid[y][x], 80, 10, 10000, 1, 5, 60, chiikawa, listT, chiikawa2); //listE, cell, cost, damage, range, level, speed, totalcd, sprite, listT, upgradedSprite
           if (temp.getCost() <= currency.getMoney())
           {
             temp.buff(); // ADDING BUFF HERE SO THAT IT DOESNT KEEP LOOPING IN DRAW
@@ -190,8 +197,9 @@ void mouseCheck(){
         }
       }
     }
+    
     if (keyPressed){
-      if (key == '4'){ //remove towers
+      if (key == '5'){ //remove towers
         for (int i = listT.size() - 1; i >= 0; i--){
           if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize)){
             listT.get(i).getCell().setOccupied(false);
@@ -204,7 +212,20 @@ void mouseCheck(){
           }
         }
       }
-     }
+      if (key == '4'){
+        for (int i = listT.size() - 1; i >= 0; i--)
+        {
+          if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize))
+          {
+            if (listT.get(i).getCost()*1.5 <= currency.getMoney() && listT.get(i).getLevel() < 2) // upgrades cost 1.5x original amount
+            {
+              listT.get(i).upgrade();
+              currency.removeMoney((int)(listT.get(i).getCost()*1.5));
+            }
+          } 
+        }
+      }
+    }
   }
 }
 

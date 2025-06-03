@@ -18,6 +18,9 @@ abstract class Tower{
   public ArrayList<Enemy> getlistE(){
     return listE; 
   }
+  public int getLevel(){
+    return level; 
+  }
   public Block getCell(){
     return cell; 
   }
@@ -105,6 +108,14 @@ abstract class Tower{
   public int getCost()
   {
     return cost;
+  }
+  
+  public void upgrade()
+  {
+    this.damage = (int)(1.5 * damage);
+    this.range = (int)(1.5 * range);
+    this.totalcd = (int)(1.2 * totalcd);
+    this.level += 1;
   }
   
 }

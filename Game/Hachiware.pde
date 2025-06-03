@@ -1,12 +1,14 @@
 class Hachiware extends Tower{
-  private PImage sprite;
+  private PImage sprite, upgradedSprite;
   private ArrayList<Poop> listPoop;
-  private PImage poopSprite;
+  private PImage poopSprite, toiletPaper;
   
-  public Hachiware(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, ArrayList<Poop> listP, PImage sprite, PImage poopSprite){
+  public Hachiware(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, ArrayList<Poop> listP, PImage sprite, PImage poopSprite, PImage upgradedSprite, PImage toiletPaper){
     super(listE, cell, cost, damage, range, level, speed, totalcd); // ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd
     this.sprite = sprite;
     this.poopSprite = poopSprite;
+    this.upgradedSprite = upgradedSprite;
+    this.toiletPaper = toiletPaper;
     this.listPoop = listP;
   }
   
@@ -53,5 +55,11 @@ class Hachiware extends Tower{
         }
       }
     } 
+  }
+  
+  public void upgrade(){
+    super.upgrade();
+    sprite = upgradedSprite;
+    poopSprite = toiletPaper;
   }
 }
