@@ -235,7 +235,7 @@ void restart(){
   listE.clear();
   listP.clear();
   listF.clear();
+  currency = new Currency(100, bill);
   wave = new Waves(listE, map1, goblin, dekatsuyo, momonga, currency);
   houseClass = new House(100, map1.ePtMap());
-  currency = new Currency(100, bill);
 }
