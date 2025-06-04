@@ -27,6 +27,7 @@ void setup(){
    backgroundMenu = loadImage("menuBG.PNG");
    music = new SoundFile(this, "songBG.wav");
    loseSound = new SoundFile(this, "loseSound.wav");
+   winSound = new SoundFile(this, "winSound.wav");
    music.play(1, 0.5);
    
    grass = loadImage("grass.jpg"); 
