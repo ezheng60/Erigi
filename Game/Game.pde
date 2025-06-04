@@ -1,3 +1,7 @@
+import processing.sound.*;
+SoundFile music;
+SoundFile sfxHit;
+
 PImage grass, dirt, house, cave, usagi, goblin, dekatsuyo, momonga, chiikawa, hachiware, backgroundMenu, 
 food, poop, bill, usagi2, chiikawa2, hachiware2, toiletPaper, food2;
 Map map1;
@@ -18,6 +22,9 @@ void setup(){
    size(1000, 800, P2D); // 10 columns, 8 rows
    frameRate(60);
    backgroundMenu = loadImage("menuBG.PNG");
+   music = new SoundFile(this, "songBG.wav");
+   music.play(1, 0.5);
+   
    grass = loadImage("grass.jpg"); 
    dirt = loadImage("dirt.png");
    house = loadImage("house.PNG");
@@ -57,6 +64,9 @@ void setup(){
 }
 
 void draw(){
+  if (music.isPlaying() == false){
+    music.play();
+  }
   if (menu){
     mainMenu.menuDraw();
     if (mainMenu.next()){
