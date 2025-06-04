@@ -1,3 +1,8 @@
+import processing.sound.*;
+SoundFile music;
+SoundFile loseSound;
+SoundFile winSound;
+
 PImage grass, dirt, house, cave, usagi, goblin, dekatsuyo, momonga, chiikawa, hachiware, backgroundMenu, 
 food, poop, bill, usagi2, chiikawa2, hachiware2, toiletPaper, food2;
 Map map1;
@@ -13,11 +18,17 @@ Currency currency;
 boolean menu, game, gameOver, win;
 Menu mainMenu;
 Gameover gameover;
+boolean deadSong;
+boolean winSong;
 
 void setup(){
    size(1000, 800, P2D); // 10 columns, 8 rows
    frameRate(60);
    backgroundMenu = loadImage("menuBG.PNG");
+   music = new SoundFile(this, "songBG.wav");
+   loseSound = new SoundFile(this, "loseSound.wav");
+   music.play(1, 0.5);
+   
    grass = loadImage("grass.jpg"); 
    dirt = loadImage("dirt.png");
    house = loadImage("house.PNG");
@@ -57,6 +68,9 @@ void setup(){
 }
 
 void draw(){
+  if ((music.isPlaying() == false) && (gameOver == false)){
+    music.play();
+  }
   if (menu){
     mainMenu.menuDraw();
     if (mainMenu.next()){
@@ -65,17 +79,33 @@ void draw(){
     }
   }
   if (gameOver){
+    if (deadSong != true)
+    {
+      loseSound.play(1, 1);
+      deadSong = true;
+      music.stop();
+    }
     gameover.overDraw(0);
     if (gameover.next()){
       gameOver = false;
+      loseSound.stop();
+      deadSong = false;
       restart();
       game = true;
     }
   }
   if (win){
+    if (winSong != true)
+    {
+      winSound.play(1, 1);
+      winSong = true;
+      music.stop();
+    }
     gameover.overDraw(1);
     if (gameover.next()){
       win = false;
+      winSound.stop();
+      winSong = false;
       restart();
       game = true;
     }
