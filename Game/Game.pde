@@ -15,8 +15,9 @@ ArrayList<Food> listF = new ArrayList<Food>();
 ArrayList<Poop> listP = new ArrayList<Poop>();
 House houseClass;
 Currency currency;
-boolean menu, game, gameOver, win;
+boolean menu, game, gameOver, win, rules;
 Menu mainMenu;
+Rules ruleMenu;
 Gameover gameover;
 boolean deadSong;
 boolean winSong;
@@ -63,6 +64,7 @@ void setup(){
    textFont(font);
    menu = true;
    mainMenu = new Menu();
+   ruleMenu = new Rules();
    gameover = new Gameover();
    //PVector position, PVector size, int borderSize, color border, color backgroundOff, color backgroundOn, String text
 }
@@ -73,9 +75,20 @@ void draw(){
   }
   if (menu){
     mainMenu.menuDraw();
-    if (mainMenu.next()){
+    if (mainMenu.nextStart()){
       menu = false;
       game = true;
+    }
+    if (mainMenu.nextRules()){
+      menu = false;
+      rules = true;
+    }
+  }
+  if (rules){
+    ruleMenu.menuDraw();
+    if (ruleMenu.next()){
+      rules = false;
+      menu = true;
     }
   }
   if (gameOver){

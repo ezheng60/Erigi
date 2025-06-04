@@ -34,11 +34,17 @@ class Menu{
     start.isOn();
   }
   
-  public boolean next(){
+  public boolean nextStart(){
     if (start.clicked()){
       return true; 
     }
     return false;
   }
   
+  public boolean nextRules(){
+    if (rules.clicked()){
+      return true; 
+    }
+    return false;
+  }
 }
