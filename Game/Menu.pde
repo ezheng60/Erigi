@@ -17,7 +17,7 @@ class Menu{
   
   public void menuDraw(){
     background(background);
-    fill(color(249,248,242), 125);
+    fill(color(249,248,242), 100);
     rect(50, 25, 900, 200, 25);
     noFill();
     textSize(75);
