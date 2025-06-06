@@ -1,13 +1,14 @@
 class Usagi extends Tower{
-  private PImage sprite, upgradedSprite;
+  private PImage sprite, upgradedSprite, upgraded2Sprite;
   private ArrayList<Food> listFood;
   private PImage foodSprite, upgradedFood;
   
-  public Usagi(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, ArrayList<Food> listF, PImage sprite, PImage foodSprite, PImage upgradedSprite, PImage upgradedFood){
+  public Usagi(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, ArrayList<Food> listF, PImage sprite, PImage foodSprite, PImage upgradedSprite, PImage upgradedFood, PImage upgraded2Sprite){
     super(listE, cell, cost, damage, range, level, speed, totalcd); // ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd
     this.sprite = sprite;
     this.foodSprite = foodSprite;
     this.upgradedSprite = upgradedSprite;
+    this.upgraded2Sprite = upgraded2Sprite;
     this.upgradedFood = upgradedFood;
     this.listFood = listF;
   }
@@ -54,8 +55,16 @@ class Usagi extends Tower{
   }
   
   public void upgrade(){
+    if (super.getLevel() == 1)
+    {
+      sprite = upgradedSprite;
+      foodSprite = upgradedFood;
+    }
+    if (super.getLevel() == 2)
+    {
+      sprite = upgraded2Sprite;
+      foodSprite = upgradedFood;
+    }
     super.upgrade();
-    sprite = upgradedSprite;
-    foodSprite = upgradedFood;
   }
 }

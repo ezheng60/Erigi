@@ -1,11 +1,12 @@
 class Chiikawa extends Tower{
-  private PImage sprite, upgradedSprite;
+  private PImage sprite, upgradedSprite, upgraded2Sprite;
   private ArrayList<Tower> listT;
   
-  public Chiikawa(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, PImage sprite, ArrayList<Tower> listT, PImage upgradedSprite){
+  public Chiikawa(ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd, PImage sprite, ArrayList<Tower> listT, PImage upgradedSprite, PImage upgraded2Sprite){
     super(listE, cell, cost, damage, range, level, speed, totalcd); // ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd
     this.sprite = sprite;
     this.upgradedSprite = upgradedSprite;
+    this.upgraded2Sprite = upgradedSprite;
     this.listT = listT;
   }
   
@@ -49,8 +50,14 @@ class Chiikawa extends Tower{
   }
   
   public void upgrade(){
-    println("HELLO");
-    sprite = upgradedSprite;
+    if (super.getLevel() == 1)
+    {
+      sprite = upgradedSprite;
+    }
+    if (super.getLevel() == 2)
+    {
+      sprite = upgraded2Sprite;
+    }
     super.upgrade();
   }
   
