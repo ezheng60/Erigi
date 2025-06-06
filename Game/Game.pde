@@ -18,7 +18,8 @@ House houseClass;
 Currency currency;
 boolean menu, game, gameOver, win, rules;
 Menu mainMenu;
-//Rules ruleMenu;
+Rules ruleMenu;
+Win winMenu;
 Gameover gameover;
 boolean deadSong;
 boolean winSong;
@@ -63,12 +64,13 @@ void setup(){
    combineMap.endDraw();
    wave = new Waves(listE, map1, goblin, dekatsuyo, momonga, currency);
    houseClass = new House(100, map1.ePtMap());
-   font = createFont("font.ttf", 100);
+   font = createFont("font.ttf", 200);
    textFont(font);
    menu = true;
    mainMenu = new Menu();
-   //ruleMenu = new Rules();
+   ruleMenu = new Rules();
    gameover = new Gameover();
+   winMenu = new Win();
    //PVector position, PVector size, int borderSize, color border, color backgroundOff, color backgroundOn, String text
 }
 
@@ -81,7 +83,7 @@ void draw(){
     if (mainMenu.nextStart()){
       click.play();
       menu = false;
-      game = true;
+      gameOver = true;
     }
     if (mainMenu.nextRules()){
       click.play();
@@ -89,15 +91,14 @@ void draw(){
       rules = true;
     }
   }
-  /*
   if (rules){
     ruleMenu.menuDraw();
     if (ruleMenu.next()){
+      click.play();
       rules = false;
       menu = true;
     }
   }
-  */
   if (gameOver){
     if (deadSong != true)
     {
@@ -105,8 +106,8 @@ void draw(){
       deadSong = true;
       music.stop();
     }
-    gameover.overDraw(0);
-    if (gameover.next()){
+    gameover.overDraw();
+    if (gameover.nextYes()){
       click.play();
       gameOver = false;
       loseSound.stop();
@@ -122,8 +123,8 @@ void draw(){
       winSong = true;
       music.stop();
     }
-    gameover.overDraw(1);
-    if (gameover.next()){
+    winMenu.overDraw();
+    if (winMenu.next()){
       click.play();
       win = false;
       winSound.stop();
