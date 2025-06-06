@@ -5,8 +5,8 @@ class Gameover{
   private color backgroundOff = color(216,225,232);
   private color backgroundOn = color(152,186,213);
   private String head = "GAME OVER";
-  PImage chiikawa = loadImage("chiikawa.png");
-  PImage background = loadImage("menuBG.PNG");
+  PImage chiikawa = loadImage("loseChiikawa.PNG");
+  PImage background = loadImage("loseBG.PNG");
 
   public Gameover(){
     yes = new Button(new PVector(300, 400), new PVector(100, 50), 50, 0, 255, 255, 255, textColor, "Yes");
@@ -21,6 +21,7 @@ class Gameover{
     textSize(150);
     textAlign(CENTER);
     fill(color(255, 255, 255), 200);
+    image(chiikawa, 10, 0);
     text(head, 0, 40, 1000, 400);
     rect(300, 250, 400, 250);
     textSize(50);

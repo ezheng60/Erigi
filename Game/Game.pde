@@ -5,7 +5,7 @@ SoundFile winSound;
 SoundFile click;
 
 PImage grass, dirt, house, cave, usagi, goblin, dekatsuyo, momonga, chiikawa, hachiware, backgroundMenu, 
-food, poop, bill, usagi2, chiikawa2, hachiware2, toiletPaper, food2;
+food, poop, bill, usagi2, chiikawa2, hachiware2, toiletPaper, food2, loseBG, loseChiikawa;
 Map map1;
 Waves wave;
 PGraphics combineMap;
@@ -28,6 +28,8 @@ void setup(){
    size(1000, 800, P2D); // 10 columns, 8 rows
    frameRate(60);
    backgroundMenu = loadImage("menuBG.PNG");
+   loseBG = loadImage("loseBG.PNG");
+   loseChiikawa = loadImage("loseChiikawa.PNG");
    music = new SoundFile(this, "songBG.wav");
    loseSound = new SoundFile(this, "loseSound.wav");
    winSound = new SoundFile(this, "winSound.wav");
