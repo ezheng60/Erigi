@@ -25,7 +25,7 @@ boolean winSong;
 boolean upgradePressed = false;
 
 void setup(){
-   size(1000, 800, P2D); // 10 columns, 8 rows
+   size(1000, 800, P2D); // 10 columns, 8 rows + 1 row for UI
    frameRate(60);
    backgroundMenu = loadImage("menuBG.PNG");
    music = new SoundFile(this, "songBG.wav");
@@ -276,32 +276,34 @@ void mouseCheck(){
       if (key == '4'){
         if (upgradePressed == false)
         {
-        for (int i = listT.size() - 1; i >= 0; i--)
-        {
-          if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize))
+          upgradePressed = true;
+          for (int i = listT.size() - 1; i >= 0; i--)
           {
-            if (listT.get(i).getCost()*3 <= currency.getMoney() && listT.get(i).getLevel() == 2) // upgrades cost 1.5x original amount
+            if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize))
             {
-              click.play();
-              listT.get(i).upgrade();
-              currency.removeMoney((int)(listT.get(i).getCost()*3));
+              if (listT.get(i).getCost()*3 <= currency.getMoney() && listT.get(i).getLevel() == 2) // upgrades cost 1.5x original amount
+              {
+                click.play();
+                listT.get(i).upgrade();
+                currency.removeMoney((int)(listT.get(i).getCost()*3));
+              }
+              else if (listT.get(i).getCost()*1.5 <= currency.getMoney() && listT.get(i).getLevel() == 1) // upgrades cost 1.5x original amount
+              {
+                click.play();
+                listT.get(i).upgrade();
+                currency.removeMoney((int)(listT.get(i).getCost()*1.5));
+              }
+              break;
             }
-            else if (listT.get(i).getCost()*1.5 <= currency.getMoney() && listT.get(i).getLevel() == 1) // upgrades cost 1.5x original amount
-            {
-              click.play();
-              listT.get(i).upgrade();
-              currency.removeMoney((int)(listT.get(i).getCost()*1.5));
-            }
-          } 
+          }
         }
       }
-      else 
-      {
-        upgradePressed = false;
-      }
+    }
+    else 
+    {
+      upgradePressed = false;
     }
   }
-}
 }
 
 void restart(){

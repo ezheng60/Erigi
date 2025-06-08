@@ -6,7 +6,7 @@ class Chiikawa extends Tower{
     super(listE, cell, cost, damage, range, level, speed, totalcd); // ArrayList<Enemy> listE, Block cell, int cost, int damage, int range, int level, int speed, int totalcd
     this.sprite = sprite;
     this.upgradedSprite = upgradedSprite;
-    this.upgraded2Sprite = upgradedSprite;
+    this.upgraded2Sprite = upgraded2Sprite;
     this.listT = listT;
   }
   
