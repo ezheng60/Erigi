@@ -6,7 +6,7 @@ class Rules{
   private color backgroundOn = color(152,186,213);
   private String text = "Go Back";
   private String head = "Rules";
-  private String rules = "The objective of the game is to protect the house from monsters. Players can buy towers to kill these enemies before they reach their house. The yellow bunny is Usagi; the middle one is Chiikawa; the one with blue ears is Hachiware. Usagi will throw food at enemies, Chiikawa will boost the speed of the attacks of other towers around him, and Hachiware will throw poop to attack enemies. Players can press keys 1, 2, or 3 and click on a grid on the map to buy towers there. They can upgrade towers by hovering on the tower and pressing 4. They can also delete towers by pressing the key 4 and clicking on that grid.";
+  private String rules = "The objective of the game is to protect the house from monsters. Players can buy towers to kill these enemies before they reach their house. The yellow bunny is Usagi; the middle one is Chiikawa; the one with blue ears is Hachiware. Usagi will throw food at enemies, Chiikawa will boost the speed of the attacks of other towers around him, and Hachiware will throw poop to attack enemies. Players can press keys 1, 2, or 3 and click on a grid on the map to buy towers there. They can upgrade towers by hovering on the tower and pressing 4. They can also delete towers by pressing the key 5 and clicking on that grid.";
   PImage chiikawa = loadImage("chiikawa.png");
   PImage background = loadImage("menuBG.PNG");
 

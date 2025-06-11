@@ -5,7 +5,7 @@ SoundFile winSound;
 SoundFile click;
 
 PImage grass, dirt, house, cave, usagi, goblin, dekatsuyo, momonga, chiikawa, hachiware, backgroundMenu, 
-food, poop, bill, usagi2, chiikawa2, hachiware2, toiletPaper, food2, loseBG, loseChiikawa;
+food, poop, bill, usagi2, chiikawa2, hachiware2, toiletPaper, food2, usagi3, chiikawa3, hachiware3;
 Map map1;
 Waves wave;
 PGraphics combineMap;
@@ -23,19 +23,18 @@ Win winMenu;
 Gameover gameover;
 boolean deadSong;
 boolean winSong;
+boolean upgradePressed = false;
 
 void setup(){
-   size(1000, 800, P2D); // 10 columns, 8 rows
+   size(1000, 800, P2D); // 10 columns, 8 rows + 1 row for UI
    frameRate(60);
    backgroundMenu = loadImage("menuBG.PNG");
-   loseBG = loadImage("loseBG.PNG");
-   loseChiikawa = loadImage("loseChiikawa.PNG");
    music = new SoundFile(this, "songBG.wav");
    loseSound = new SoundFile(this, "loseSound.wav");
    winSound = new SoundFile(this, "winSound.wav");
    click = new SoundFile(this, "click.wav");
-   music.play(1, 0.5);
-   
+   music.play(1, 0.1);
+ 
    grass = loadImage("grass.jpg"); 
    dirt = loadImage("dirt.png");
    house = loadImage("house.PNG");
@@ -58,6 +57,9 @@ void setup(){
    toiletPaper = loadImage("toiletPaper.PNG");
    bill = loadImage("bill.PNG");
    food2 = loadImage("food2.PNG");
+   hachiware3 = loadImage("hachiware3.PNG");
+   chiikawa3 = loadImage("chiikawa3.png");
+   usagi3 = loadImage("usagi3.png");
    currency = new Currency(100, bill);
    map1 = new Map();
    combineMap = createGraphics(width, height); // this makes all the images into one
@@ -78,7 +80,7 @@ void setup(){
 
 void draw(){
   if ((music.isPlaying() == false) && (gameOver == false)){
-    music.play();
+    music.play(1, 0.25);
   }
   if (menu){
     mainMenu.menuDraw();
@@ -230,7 +232,7 @@ void mouseCheck(){
       {
         if (key == '1')
         {
-          Tower temp = new Usagi(listE, map1.grid[y][x], 25, 10, 150, 1, 2, 60, listF, usagi, food, usagi2, food2); //listE, cell, cost, damage, range, level, speed, totalcd, listF, sprite, foodSprite, upgradedSprite, upgradedFood
+          Tower temp = new Usagi(listE, map1.grid[y][x], 25, 10, 150, 1, 2, 60, listF, usagi, food, usagi2, food2, usagi3); //listE, cell, cost, damage, range, level, speed, totalcd, listF, sprite, foodSprite, upgradedSprite, upgradedFood
           if (temp.getCost() <= currency.getMoney())
           {
             click.play();
@@ -246,7 +248,7 @@ void mouseCheck(){
         
         if (key == '2')
         {
-          Tower temp = new Hachiware(listE, map1.grid[y][x], 40, 10, 150, 1, 5, 60, listP, hachiware, poop, hachiware2, toiletPaper); //listE, cell, cost, damage, range, level, speed, totalcd, listP, sprite, upgradedSprite, toiletPaper
+          Tower temp = new Hachiware(listE, map1.grid[y][x], 40, 10, 150, 1, 5, 60, listP, hachiware, poop, hachiware2, toiletPaper, hachiware3); //listE, cell, cost, damage, range, level, speed, totalcd, listP, sprite, upgradedSprite, toiletPaper
           if (temp.getCost() <= currency.getMoney())
           {
             click.play();
@@ -261,7 +263,7 @@ void mouseCheck(){
         }
         if (key == '3')
         {
-          Tower temp = new Chiikawa(listE, map1.grid[y][x], 80, 10, 10000, 1, 5, 60, chiikawa, listT, chiikawa2); //listE, cell, cost, damage, range, level, speed, totalcd, sprite, listT, upgradedSprite
+          Tower temp = new Chiikawa(listE, map1.grid[y][x], 80, 10, 10000, 1, 5, 60, chiikawa, listT, chiikawa2, chiikawa3); //listE, cell, cost, damage, range, level, speed, totalcd, sprite, listT, upgradedSprite
           if (temp.getCost() <= currency.getMoney())
           {
             click.play();
@@ -289,19 +291,34 @@ void mouseCheck(){
         }
       }
       if (key == '4'){
-        for (int i = listT.size() - 1; i >= 0; i--)
+        if (upgradePressed == false)
         {
-          if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize))
+          upgradePressed = true;
+          for (int i = listT.size() - 1; i >= 0; i--)
           {
-            if (listT.get(i).getCost()*1.5 <= currency.getMoney() && listT.get(i).getLevel() < 2) // upgrades cost 1.5x original amount
+            if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize))
             {
-              click.play();
-              listT.get(i).upgrade();
-              currency.removeMoney((int)(listT.get(i).getCost()*1.5));
+              if (listT.get(i).getCost()*3 <= currency.getMoney() && listT.get(i).getLevel() == 2) // upgrades cost 1.5x original amount
+              {
+                click.play();
+                listT.get(i).upgrade();
+                currency.removeMoney((int)(listT.get(i).getCost()*3));
+              }
+              else if (listT.get(i).getCost()*1.5 <= currency.getMoney() && listT.get(i).getLevel() == 1) // upgrades cost 1.5x original amount
+              {
+                click.play();
+                listT.get(i).upgrade();
+                currency.removeMoney((int)(listT.get(i).getCost()*1.5));
+              }
+              break;
             }
-          } 
+          }
         }
       }
+    }
+    else 
+    {
+      upgradePressed = false;
     }
   }
 }

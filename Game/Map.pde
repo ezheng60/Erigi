@@ -3,7 +3,7 @@ class Map{
   private PVector sPt; // spawning point
   private PVector ePt; // house
 
-  // CHANGE TEMP TO CHANGE MAP; 0 means grass; -1 is start; 1 is path; -2 is house
+  // CHANGE TEMP TO CHANGE MAP; 0 means grass; -1 is start; 1 is path; -2 is house; 2 is UI
   int[][] temp = new int[][]{{0, 0, 0, -1, 0, 0, 0, 0, 0, 0}, // 8 rows 10 columns
                              {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
                              {0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
@@ -11,7 +11,8 @@ class Map{
                              {0, 1, 0, 0, 0, 0, 1, 0, 1, 0},
                              {0, 1, 1, 1, 1, 1, 1, 0, 1, 0},
                              {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-                             {0, 0, 0, 0, 0, 0, 0, 0, 1, -2}}; 
+                             {0, 0, 0, 0, 0, 0, 0, 0, 1, -2}/*,
+                             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2}*/}; 
  
  public Map(){
     grid = new Block[height/Block.blockSize][width/Block.blockSize];
@@ -26,6 +27,9 @@ class Map{
           }
           if (temp[a][b] == -2){ // b is actaulyl the x coord, and a is actually y coord
             ePt = new PVector(b*Block.blockSize, a*Block.blockSize);
+          }
+          if (temp[a][b] == 2){ 
+            grid[a][b] = new Block(b*Block.blockSize, a*Block.blockSize, true, true);
           }
           grid[a][b] = new Block(b*Block.blockSize, a*Block.blockSize, true, true);
         }
