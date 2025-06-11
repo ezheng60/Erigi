@@ -11,7 +11,7 @@ class Rules{
   PImage background = loadImage("menuBG.PNG");
 
   public Rules(){
-    back = new Button(new PVector(350, 625), new PVector(300, 100), 75, 5, border,backgroundOff, backgroundOn, textColor, text);
+    back = new Button(new PVector(350, 625), new PVector(300, 100), 255, 75, 5, border,backgroundOff, backgroundOn, textColor, text);
     // PVector position, PVector size, textSize, int borderSize, color border, color backgroundOff, color backgroundOn, textColor, String text
   }
   

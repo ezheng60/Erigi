@@ -85,7 +85,7 @@ void draw(){
     if (mainMenu.nextStart()){
       click.play();
       menu = false;
-      gameOver = true;
+      win = true;
     }
     if (mainMenu.nextRules()){
       click.play();
@@ -102,13 +102,13 @@ void draw(){
     }
   }
   if (gameOver){
+    gameover.overDraw();
     if (deadSong != true)
     {
       loseSound.play(1, 1);
       deadSong = true;
       music.stop();
     }
-    gameover.overDraw();
     if (gameover.nextYes()){
       click.play();
       gameOver = false;
@@ -116,6 +116,14 @@ void draw(){
       deadSong = false;
       restart();
       game = true;
+    }
+    if (gameover.nextNo()){
+      click.play();
+      gameOver = false;
+      loseSound.stop();
+      deadSong = false;
+      restart();
+      menu = true;
     }
   }
   if (win){
@@ -126,13 +134,21 @@ void draw(){
       music.stop();
     }
     winMenu.overDraw();
-    if (winMenu.next()){
+    if (winMenu.nextYes()){
       click.play();
       win = false;
       winSound.stop();
       winSong = false;
       restart();
       game = true;
+    }
+    if (winMenu.nextNo()){
+      click.play();
+      win = false;
+      winSound.stop();
+      winSong = false;
+      restart();
+      menu = true;
     }
   }
   // BELOW IS GAME

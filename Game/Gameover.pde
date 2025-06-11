@@ -1,16 +1,16 @@
 class Gameover{
   private Button yes, no;
-  private color border = color(176,207,255);
+  private color border = color(255, 255, 255);
   private color textColor = color(0, 0, 0);
-  private color backgroundOff = color(216,225,232);
-  private color backgroundOn = color(152,186,213);
+  private color backgroundOff = color(255, 255, 255);
+  private color backgroundOn = color(255, 255, 255);
   private String head = "GAME OVER";
   PImage chiikawa = loadImage("loseChiikawa.PNG");
   PImage background = loadImage("loseBG.PNG");
 
   public Gameover(){
-    yes = new Button(new PVector(300, 400), new PVector(100, 50), 50, 0, 255, 255, 255, textColor, "Yes");
-    no = new Button(new PVector(600, 400), new PVector(100, 50), 50, 0, border, backgroundOff, backgroundOn, textColor, "No");
+    yes = new Button(new PVector(300, 375), new PVector(100, 50), 0, 50, 0, 255, 255, 255, textColor, "Yes");
+    no = new Button(new PVector(600, 375), new PVector(100, 50), 0, 50, 0, border, backgroundOff, backgroundOn, textColor, "No");
 
     // PVector position, PVector size, textSize, int borderSize, color border, color backgroundOff, color backgroundOn, textColor, String text
   }
@@ -20,14 +20,19 @@ class Gameover{
     noTint();
     textSize(150);
     textAlign(CENTER);
-    fill(color(255, 255, 255), 200);
-    image(chiikawa, 10, 0);
+    fill(color(255, 255, 255));
     text(head, 0, 40, 1000, 400);
-    rect(300, 250, 400, 250);
+    fill(color(255, 255, 255), 175);
+    image(chiikawa, 10, 20);
+    noTint();
+    rect(300, 225, 400, 250);
     textSize(50);
+    fill(0);
     text("Play again?", 300, 275, 400, 300);
     yes.drawButton();
+    yes.isOn();
     no.drawButton();
+    no.isOn();
   }
   
   public boolean nextYes(){

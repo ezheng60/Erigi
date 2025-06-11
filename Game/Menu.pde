@@ -10,8 +10,8 @@ class Menu{
   PImage background = loadImage("menuBG.PNG");
 
   public Menu(){
-    start = new Button(new PVector(75, 300), new PVector(300, 100), 75, 5, border,backgroundOff, backgroundOn, textColor, text);
-    rules = new Button(new PVector(75, 450), new PVector(300, 100), 75, 5, border,backgroundOff, backgroundOn, textColor, "Rules");
+    start = new Button(new PVector(75, 300), new PVector(300, 100), 255, 75, 5, border,backgroundOff, backgroundOn, textColor, text);
+    rules = new Button(new PVector(75, 450), new PVector(300, 100), 255, 75, 5, border,backgroundOff, backgroundOn, textColor, "Rules");
     // PVector position, PVector size, textSize, int borderSize, color border, color backgroundOff, color backgroundOn, textColor, String text
   }
   
