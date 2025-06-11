@@ -87,7 +87,7 @@ void draw(){
     if (mainMenu.nextStart()){
       click.play();
       menu = false;
-      win = true;
+      game = true;
     }
     if (mainMenu.nextRules()){
       click.play();

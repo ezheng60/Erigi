@@ -5,7 +5,7 @@ class Win{
   private color backgroundOff = color(216,225,232);
   private color backgroundOn = color(152,186,213);
   private String head = "YOU WIN!";
-  PImage chiikawa = loadImage("chiikawa.png");
+  PImage chiikawa = loadImage("winChiikawa.PNG");
   PImage background = loadImage("menuBG.PNG");
 
   public Win(){
@@ -23,7 +23,7 @@ class Win{
     fill(color(0, 0, 0));
     text(head, 0, 40, 1000, 400);
     fill(color(255, 255, 255), 175);
-    image(chiikawa, 400, 20);
+    image(chiikawa, 125, 400);
     noTint();
     rect(300, 225, 400, 250);
     textSize(50);
