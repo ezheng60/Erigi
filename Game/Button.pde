@@ -1,11 +1,12 @@
 class Button{
   private boolean on;
   private PVector position, size;
-  private int borderSize, textSize;
+  private int borderSize, textSize, opacity;
   private color border, backgroundOff, backgroundOn, textColor; // COLORS
   private String text;
   
-  public Button(PVector position, PVector size, int textSize, int borderSize, color border, color backgroundOff, color backgroundOn, color textColor, String text){
+  public Button(PVector position, PVector size, int opacity, int textSize, int borderSize, color border, color backgroundOff, color backgroundOn, color textColor, String text){
+    this.opacity = opacity;
     this.on = false;
     this.borderSize = borderSize;
     this.position = position;
@@ -28,14 +29,14 @@ class Button{
   
   public void drawButton(){
     noStroke();
-    fill(border);
+    fill(border, opacity);
     rect(position.x-borderSize, position.y-borderSize, size.x+borderSize*2, size.y+borderSize*2);
     noFill();
     if (on){
-      fill(backgroundOn);
+      fill(backgroundOn, opacity);
     }
     else{
-      fill(backgroundOff); 
+      fill(backgroundOff, opacity); 
     }
     rect(position.x, position.y, size.x, size.y);
     noFill();

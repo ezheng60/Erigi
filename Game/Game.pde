@@ -6,6 +6,7 @@ SoundFile click;
 
 PImage grass, dirt, house, cave, usagi, goblin, dekatsuyo, momonga, chiikawa, hachiware, backgroundMenu, 
 food, poop, bill, usagi2, chiikawa2, hachiware2, toiletPaper, food2, usagi3, chiikawa3, hachiware3;
+
 Map map1;
 Waves wave;
 PGraphics combineMap;
@@ -18,7 +19,8 @@ House houseClass;
 Currency currency;
 boolean menu, game, gameOver, win, rules;
 Menu mainMenu;
-//Rules ruleMenu;
+Rules ruleMenu;
+Win winMenu;
 Gameover gameover;
 boolean deadSong;
 boolean winSong;
@@ -28,6 +30,8 @@ void setup(){
    size(1000, 800, P2D); // 10 columns, 8 rows + 1 row for UI
    frameRate(60);
    backgroundMenu = loadImage("menuBG.PNG");
+   loseBG = loadImage("loseBG.PNG");
+   loseChiikawa = loadImage("loseChiikawa.PNG");
    music = new SoundFile(this, "songBG.wav");
    loseSound = new SoundFile(this, "loseSound.wav");
    winSound = new SoundFile(this, "winSound.wav");
@@ -67,12 +71,13 @@ void setup(){
    combineMap.endDraw();
    wave = new Waves(listE, map1, goblin, dekatsuyo, momonga, currency);
    houseClass = new House(100, map1.ePtMap());
-   font = createFont("font.ttf", 100);
+   font = createFont("font.ttf", 200);
    textFont(font);
    menu = true;
    mainMenu = new Menu();
-   //ruleMenu = new Rules();
+   ruleMenu = new Rules();
    gameover = new Gameover();
+   winMenu = new Win();
    //PVector position, PVector size, int borderSize, color border, color backgroundOff, color backgroundOn, String text
 }
 
@@ -85,7 +90,7 @@ void draw(){
     if (mainMenu.nextStart()){
       click.play();
       menu = false;
-      game = true;
+      win = true;
     }
     if (mainMenu.nextRules()){
       click.play();
@@ -93,30 +98,37 @@ void draw(){
       rules = true;
     }
   }
-  /*
   if (rules){
     ruleMenu.menuDraw();
     if (ruleMenu.next()){
+      click.play();
       rules = false;
       menu = true;
     }
   }
-  */
   if (gameOver){
+    gameover.overDraw();
     if (deadSong != true)
     {
       loseSound.play(1, 1);
       deadSong = true;
       music.stop();
     }
-    gameover.overDraw(0);
-    if (gameover.next()){
+    if (gameover.nextYes()){
       click.play();
       gameOver = false;
       loseSound.stop();
       deadSong = false;
       restart();
       game = true;
+    }
+    if (gameover.nextNo()){
+      click.play();
+      gameOver = false;
+      loseSound.stop();
+      deadSong = false;
+      restart();
+      menu = true;
     }
   }
   if (win){
@@ -126,14 +138,22 @@ void draw(){
       winSong = true;
       music.stop();
     }
-    gameover.overDraw(1);
-    if (gameover.next()){
+    winMenu.overDraw();
+    if (winMenu.nextYes()){
       click.play();
       win = false;
       winSound.stop();
       winSong = false;
       restart();
       game = true;
+    }
+    if (winMenu.nextNo()){
+      click.play();
+      win = false;
+      winSound.stop();
+      winSong = false;
+      restart();
+      menu = true;
     }
   }
   // BELOW IS GAME
