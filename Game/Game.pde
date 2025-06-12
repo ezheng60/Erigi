@@ -27,6 +27,8 @@ boolean upgradePressed = false;
 int msecs;
 int secs;
 int mins;
+boolean uiPressed = false;
+Tower uiTower;
 
 void setup(){
    size(1000, 800, P2D); // 10 columns, 8 rows + 1 row for UI
@@ -223,6 +225,9 @@ void draw(){
       win = true;
       game = false;
     }
+    if (uiPressed){
+      drawUI(uiTower);
+    }
   }
 }
 
@@ -295,40 +300,13 @@ void mouseCheck(){
       }
       if (key == 'i')
       {
-        for (int i = listT.size() - 1; i >= 0; i--){
-          if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize)){
-            fill(159, 205, 228, 128);
-            stroke(159, 205, 228);
-            strokeWeight(10);
-            rect(Block.blockSize*3, Block.blockSize*7 - 40, Block.blockSize*3.2, Block.blockSize + 20, 30);
-            strokeWeight(1);
-            fill(0);
-            image(listT.get(i).getSprite(), Block.blockSize*3, Block.blockSize*7 - 25, Block.blockSize, Block.blockSize);
-            textSize(Block.blockSize/4);
-            pushStyle(); //to prevent other texts from left text align
-            textAlign(LEFT);
-            text(listT.get(i).getClass().getSimpleName(), Block.blockSize*4, Block.blockSize*7 - 5);
-            textSize(Block.blockSize/6);
-            text("Damage: " + listT.get(i).getDamage(), Block.blockSize*4, Block.blockSize*7 - 5 + Block.blockSize/6);
-            text("Speed: " + listT.get(i).getSpeed(), Block.blockSize*4, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
-            text("Range: " + listT.get(i).getRange(), Block.blockSize*4, Block.blockSize*7 - 5 + (3*Block.blockSize/6));
-            text("Cooldown: " + listT.get(i).getcd(), Block.blockSize*4, Block.blockSize*7 - 5 + (4*Block.blockSize/6));
-            text("Level: " + listT.get(i).getLevel(), Block.blockSize*5, Block.blockSize*7 - 5 + Block.blockSize/6);
-            if (listT.get(i).getLevel() == 1)
-            {
-              text("Upgrade: $" + listT.get(i).getCost()*1.5, Block.blockSize*5, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
+        if (uiPressed == false)
+        {
+          uiPressed = true;
+          for (int i = listT.size() - 1; i >= 0; i--){
+            if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize)){
+              uiTower = listT.get(i);
             }
-            else if (listT.get(i).getLevel() == 2)
-            {
-              text("Upgrade: $" + listT.get(i).getCost()*3, Block.blockSize*5, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
-            }
-            else
-            {
-              text("MAX upgrade", Block.blockSize*5, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
-            }
-             text("Sell: $" + listT.get(i).getCost()*0.7, Block.blockSize*5, Block.blockSize*7 - 5 + (3*Block.blockSize/6));
-            
-            popStyle();
           }
         }
         
@@ -341,13 +319,13 @@ void mouseCheck(){
           {
             if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize))
             {
-              if (listT.get(i).getCost()*3 <= currency.getMoney() && listT.get(i).getLevel() == 2) // upgrades cost 3x original amount
+              if (listT.get(i).getCost()*1.5 <= currency.getMoney() && listT.get(i).getLevel() == 2) // upgrades cost 1.5x original amount
               {
                 click.play();
                 listT.get(i).upgrade();
                 currency.removeMoney((int)(listT.get(i).getCost()*3));
               }
-              else if (listT.get(i).getCost()*1.5 <= currency.getMoney() && listT.get(i).getLevel() == 1) // upgrades cost 1.5x original amount
+              else if (listT.get(i).getCost()*1.2 <= currency.getMoney() && listT.get(i).getLevel() == 1) // upgrades cost 1.2x original amount
               {
                 click.play();
                 listT.get(i).upgrade();
@@ -362,6 +340,7 @@ void mouseCheck(){
     else 
     {
       upgradePressed = false;
+      uiPressed = false;
     }
       pushStyle(); //to prevent other texts from left text align
       textAlign(LEFT);
@@ -390,6 +369,41 @@ String doubleTime(int t){
     return "0";
   }
   return "";
+}
+
+void drawUI(Tower t){
+            fill(159, 205, 228, 128);
+            stroke(159, 205, 228);
+            strokeWeight(10);
+            rect(Block.blockSize*3, Block.blockSize*7 - 40, Block.blockSize*3.2, Block.blockSize + 20, 30);
+            strokeWeight(1);
+            fill(0);
+            image(t.getSprite(), Block.blockSize*3, Block.blockSize*7 - 25, Block.blockSize, Block.blockSize);
+            textSize(Block.blockSize/4);
+            pushStyle(); //to prevent other texts from left text align
+            textAlign(LEFT);
+            text(t.getClass().getSimpleName(), Block.blockSize*4, Block.blockSize*7 - 5);
+            textSize(Block.blockSize/6);
+            text("Damage: " + t.getDamage(), Block.blockSize*4, Block.blockSize*7 - 5 + Block.blockSize/6);
+            text("Speed: " + t.getSpeed(), Block.blockSize*4, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
+            text("Range: " + t.getRange(), Block.blockSize*4, Block.blockSize*7 - 5 + (3*Block.blockSize/6));
+            text("Cooldown: " + t.getcd(), Block.blockSize*4, Block.blockSize*7 - 5 + (4*Block.blockSize/6));
+            text("Level: " + t.getLevel(), Block.blockSize*5, Block.blockSize*7 - 5 + Block.blockSize/6);
+            if (t.getLevel() == 1)
+            {
+              text("Upgrade: $" + (int) (t.getCost()*1.2), Block.blockSize*5, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
+            }
+            else if (t.getLevel() == 2)
+            {
+              text("Upgrade: $" + (int) (t.getCost()*1.5), Block.blockSize*5, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
+            }
+            else
+            {
+              text("MAX upgrade", Block.blockSize*5, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
+            }
+             text("Sell: $" + t.getCost()*0.7, Block.blockSize*5, Block.blockSize*7 - 5 + (3*Block.blockSize/6));
+            
+            popStyle();
 }
 
 void restart(){
