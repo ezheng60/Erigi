@@ -235,7 +235,7 @@ void mouseCheck(){
       {
         if (key == '1')
         {
-          Tower temp = new Usagi(listE, map1.grid[y][x], 25, 10, 150, 1, 2, 60, listF, usagi, food, usagi2, food2, usagi3); //listE, cell, cost, damage, range, level, speed, totalcd, listF, sprite, foodSprite, upgradedSprite, upgradedFood
+          Tower temp = new Usagi(listE, map1.grid[y][x], 25, 20, 150, 1, 2, 60, listF, usagi, food, usagi2, food2, usagi3); //listE, cell, cost, damage, range, level, speed, totalcd, listF, sprite, foodSprite, upgradedSprite, upgradedFood
           if (temp.getCost() <= currency.getMoney())
           {
             click.play();
@@ -251,7 +251,7 @@ void mouseCheck(){
         
         if (key == '2')
         {
-          Tower temp = new Hachiware(listE, map1.grid[y][x], 40, 10, 150, 1, 5, 60, listP, hachiware, poop, hachiware2, toiletPaper, hachiware3); //listE, cell, cost, damage, range, level, speed, totalcd, listP, sprite, upgradedSprite, toiletPaper
+          Tower temp = new Hachiware(listE, map1.grid[y][x], 40, 14, 150, 1, 5, 60, listP, hachiware, poop, hachiware2, toiletPaper, hachiware3); //listE, cell, cost, damage, range, level, speed, totalcd, listP, sprite, upgradedSprite, toiletPaper
           if (temp.getCost() <= currency.getMoney())
           {
             click.play();
@@ -266,7 +266,7 @@ void mouseCheck(){
         }
         if (key == '3')
         {
-          Tower temp = new Chiikawa(listE, map1.grid[y][x], 80, 0, 6, 1, 5, 60, chiikawa, listT, chiikawa2, chiikawa3); //listE, cell, cost, damage, range, level, speed, totalcd, sprite, listT, upgradedSprite
+          Tower temp = new Chiikawa(listE, map1.grid[y][x], 80, 0, 150, 1, 5, 60, chiikawa, listT, chiikawa2, chiikawa3); //listE, cell, cost, damage, range, level, speed, totalcd, sprite, listT, upgradedSprite
           if (temp.getCost() <= currency.getMoney())
           {
             click.play();

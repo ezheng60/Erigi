@@ -67,20 +67,6 @@ abstract class Tower{
     return false;
   } // REMEMEBER THAT POSITIONS ARE THE TOP LEFT CORNER NOT THE CENTER
   
-  /*
-  public int getFirst(){ // COME BACK TO THIS LATER WHEN COLLISION IS FIXED
-    int max = 0;
-    int index = 0;
-    for (int i = 0; i < listE.size(); i++){
-      if (listE.get(i).getDistance() > max ){
-        index = i;
-        max = listE.get(i).getDistance();
-      }
-    }
-    return index;
-  }
-  */
-  
   public void attack()
   {
   }
