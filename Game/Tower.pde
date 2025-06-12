@@ -118,4 +118,7 @@ abstract class Tower{
     this.level += 1;
   }
   
+  public PImage getSprite(){
+    return null;
+  }
 }

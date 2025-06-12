@@ -24,6 +24,9 @@ Gameover gameover;
 boolean deadSong;
 boolean winSong;
 boolean upgradePressed = false;
+int msecs;
+int secs;
+int mins;
 
 void setup(){
    size(1000, 800, P2D); // 10 columns, 8 rows + 1 row for UI
@@ -263,7 +266,7 @@ void mouseCheck(){
         }
         if (key == '3')
         {
-          Tower temp = new Chiikawa(listE, map1.grid[y][x], 80, 10, 10000, 1, 5, 60, chiikawa, listT, chiikawa2, chiikawa3); //listE, cell, cost, damage, range, level, speed, totalcd, sprite, listT, upgradedSprite
+          Tower temp = new Chiikawa(listE, map1.grid[y][x], 80, 0, 6, 1, 5, 60, chiikawa, listT, chiikawa2, chiikawa3); //listE, cell, cost, damage, range, level, speed, totalcd, sprite, listT, upgradedSprite
           if (temp.getCost() <= currency.getMoney())
           {
             click.play();
@@ -290,6 +293,46 @@ void mouseCheck(){
           }
         }
       }
+      if (key == 'i')
+      {
+        for (int i = listT.size() - 1; i >= 0; i--){
+          if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize)){
+            fill(159, 205, 228, 128);
+            stroke(159, 205, 228);
+            strokeWeight(10);
+            rect(Block.blockSize*3, Block.blockSize*7 - 40, Block.blockSize*3.2, Block.blockSize + 20, 30);
+            strokeWeight(1);
+            fill(0);
+            image(listT.get(i).getSprite(), Block.blockSize*3, Block.blockSize*7 - 25, Block.blockSize, Block.blockSize);
+            textSize(Block.blockSize/4);
+            pushStyle(); //to prevent other texts from left text align
+            textAlign(LEFT);
+            text(listT.get(i).getClass().getSimpleName(), Block.blockSize*4, Block.blockSize*7 - 5);
+            textSize(Block.blockSize/6);
+            text("Damage: " + listT.get(i).getDamage(), Block.blockSize*4, Block.blockSize*7 - 5 + Block.blockSize/6);
+            text("Speed: " + listT.get(i).getSpeed(), Block.blockSize*4, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
+            text("Range: " + listT.get(i).getRange(), Block.blockSize*4, Block.blockSize*7 - 5 + (3*Block.blockSize/6));
+            text("Cooldown: " + listT.get(i).getcd(), Block.blockSize*4, Block.blockSize*7 - 5 + (4*Block.blockSize/6));
+            text("Level: " + listT.get(i).getLevel(), Block.blockSize*5, Block.blockSize*7 - 5 + Block.blockSize/6);
+            if (listT.get(i).getLevel() == 1)
+            {
+              text("Upgrade: $" + listT.get(i).getCost()*1.5, Block.blockSize*5, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
+            }
+            else if (listT.get(i).getLevel() == 2)
+            {
+              text("Upgrade: $" + listT.get(i).getCost()*3, Block.blockSize*5, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
+            }
+            else
+            {
+              text("MAX upgrade", Block.blockSize*5, Block.blockSize*7 - 5 + (2*Block.blockSize/6));
+            }
+             text("Sell: $" + listT.get(i).getCost()*0.7, Block.blockSize*5, Block.blockSize*7 - 5 + (3*Block.blockSize/6));
+            
+            popStyle();
+          }
+        }
+        
+      }
       if (key == '4'){
         if (upgradePressed == false)
         {
@@ -298,7 +341,7 @@ void mouseCheck(){
           {
             if ((listT.get(i).getCell().getx() == x*Block.blockSize) && (listT.get(i).getCell().gety() == y*Block.blockSize))
             {
-              if (listT.get(i).getCost()*3 <= currency.getMoney() && listT.get(i).getLevel() == 2) // upgrades cost 1.5x original amount
+              if (listT.get(i).getCost()*3 <= currency.getMoney() && listT.get(i).getLevel() == 2) // upgrades cost 3x original amount
               {
                 click.play();
                 listT.get(i).upgrade();
@@ -320,11 +363,40 @@ void mouseCheck(){
     {
       upgradePressed = false;
     }
+      pushStyle(); //to prevent other texts from left text align
+      textAlign(LEFT);
+      textSize(Block.blockSize / 3);
+      text("WAVE " + wave.getWave() + "/10", Block.blockSize/6, Block.blockSize/3);
+      textSize(Block.blockSize / 4);
+      text(doubleTime(mins) + mins + ":" + doubleTime(secs) + secs + ":" + doubleTime(msecs) +msecs, Block.blockSize/6, Block.blockSize/3 + Block.blockSize/3);
+      popStyle();
+      msecs++;
+      if (msecs >= 60)
+      {
+        msecs = 0;
+        secs++;
+      }
+      if (secs >= 60)
+      {
+        secs = 0;
+        mins++;
+      }
   }
+}
+
+String doubleTime(int t){
+  if ((t / 10) == 0)
+  {
+    return "0";
+  }
+  return "";
 }
 
 void restart(){
   map1 = new Map();
+  msecs = 0;
+  secs = 0;
+  mins = 0;
   listT.clear();
   listE.clear();
   listP.clear();

@@ -61,6 +61,10 @@ class Chiikawa extends Tower{
     super.upgrade();
   }
   
+  public PImage getSprite(){
+    return sprite;
+  }
+  
   
   
 }

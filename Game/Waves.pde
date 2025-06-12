@@ -10,9 +10,9 @@ class Waves{
   private int count2 = 0; // keep track of momonga
   private int count3 = 0; // keep track of dekatsuyo
   private Currency currency;
-  private int gHP = 100;
-  private int dHP = 500;
-  private int mHP = 50;
+  private int gHP = 50;
+  private int dHP = 300;
+  private int mHP = 30;
   
   public Waves(ArrayList<Enemy> listE, Map map, PImage goblin, PImage spriteDekatsuyo, PImage spriteMomonga, Currency currency){
     this.listE = listE;
@@ -29,7 +29,7 @@ class Waves{
      }
      else{
        Goblin goblin = new Goblin(map, gHP, gHP, 5, 5, 2, true, spriteGoblin); //map, HP, maxHP, damage, bounty, speed, alive, sprite
-       Goblin dekatsuyo = new Goblin(map, dHP, dHP, 20, 20, 1, true, spriteDekatsuyo); //map, HP, maxHP, damage, bounty, speed, alive, sprite
+       Goblin dekatsuyo = new Goblin(map, dHP, dHP, 15, 20, 1, true, spriteDekatsuyo); //map, HP, maxHP, damage, bounty, speed, alive, sprite
        Goblin momonga = new Goblin(map, mHP, mHP, 4, 10, 10, true, spriteMomonga);  //map, HP, maxHP, damage, bounty, speed, alive, sprite
        if (wave == 1){
          listE.add(goblin); 

@@ -6,7 +6,7 @@ class Win{
   private color backgroundOn = color(152,186,213);
   private String head = "YOU WIN!";
   PImage chiikawa = loadImage("winChiikawa.PNG");
-  PImage background = loadImage("menuBG.PNG");
+  PImage background = loadImage("winBG.JPG");
 
   public Win(){
     yes = new Button(new PVector(300, 375), new PVector(100, 50), 0, 50, 0, 255, 255, 255, textColor, "Yes");

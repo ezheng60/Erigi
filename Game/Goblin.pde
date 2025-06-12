@@ -10,4 +10,7 @@ class Goblin extends Enemy{
     super.move(sprite);
   }
   
+  public PImage getSprite(){
+    return sprite;
+  }
 }

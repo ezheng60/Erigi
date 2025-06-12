@@ -67,4 +67,8 @@ class Usagi extends Tower{
     }
     super.upgrade();
   }
+  
+  public PImage getSprite(){
+    return sprite;
+  }
 }
